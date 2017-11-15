@@ -44,7 +44,7 @@ public class PlayerKillListener implements Listener {
 	double multiplier = profile.getMultiplier();
 	
 	if (killstreak % 10 == 0) {
-	    profile.setBalance(balance + (1 * multiplier) + 3);
+	    profile.setBalance(balance + (4 * multiplier));
 	} else {
 	    profile.setBalance(balance + (1 * multiplier));
 	}
