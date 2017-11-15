@@ -20,6 +20,7 @@ public class PlayerKillListener implements Listener {
 	if (Profile.getByPlayer(killer) != null) {
 	    Profile killerProfile = Profile.getByPlayer(killer);
 	    killerProfile.setKillstreak(killerProfile.getKillstreak() + 1);
+	    killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + deadPlayer.getName() + ". "+ ChatColor.GREEN + "You are now on a " + ChatColor.GOLD + killerProfile.getKillstreak() + " killstreak.");
 	    giveCoins(killerProfile);
 	} else {
 	    Profile killerProfile = new Profile(killer);
@@ -47,12 +48,14 @@ public class PlayerKillListener implements Listener {
 	int killstreak = profile.getKillstreak();
 	checkMultiplier(profile);
 	double multiplier = profile.getMultiplier();
+	System.out.println("Multiplier here is: " + multiplier);
 	if (killstreak % 10 == 0) {
 	    profile.setBalance(balance + (4 * multiplier));
 	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + 4 * multiplier + " coins");
 	} else {
 	    profile.setBalance(balance + (1 * multiplier));
 	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + 4 * multiplier + " coins");
+	    System.out.println(multiplier);
 	}
     }
     
