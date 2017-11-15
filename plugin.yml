@@ -1,0 +1,5 @@
+name: PyxEconomy
+description: PyxEconomy plugin.
+version: 1.0
+main: us.mattmarion.pyxeconomy.PyxEconomy
+author: Matt Marion (HM04)

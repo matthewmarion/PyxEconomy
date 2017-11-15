@@ -11,20 +11,20 @@ public class Profile {
     private static Set<Profile> profiles = new HashSet<>();
     
     private UUID uuid;
-    private String name;
+    private Player player;
     private double balance;
     private double multiplier;
     private int killstreak;
     
-    public Profile(UUID uuid, String name) {
+    public Profile(UUID uuid, Player player) {
 	this.uuid = uuid;
-	this.name = name;
+	this.player = player;
 	
 	profiles.add(this);
     }
     
     public Profile(Player player) {
-	this(player.getUniqueId(), player.getName());
+	this(player.getUniqueId(), player);
     }
     
     public static Profile getByUUID(UUID uuid) {
@@ -48,8 +48,8 @@ public class Profile {
 	return balance;
     }
     
-    public String getName() {
-	return name;
+    public Player getPlayer() {
+	return player;
     }
     
     public void setBalance(double balance) {
