@@ -17,30 +17,18 @@ public class PlayerKillListener implements Listener {
 	    return;
 	}
 	Player killer = deadPlayer.getKiller();
-	if (Profile.getByPlayer(killer) != null) {
-	    Profile killerProfile = Profile.getByPlayer(killer);
-	    killerProfile.setKillstreak(killerProfile.getKillstreak() + 1);
-	    killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + deadPlayer.getName() + ". "+ ChatColor.GREEN + "You are now on a " + ChatColor.GOLD + killerProfile.getKillstreak() + " killstreak.");
-	    giveCoins(killerProfile);
-	} else {
-	    Profile killerProfile = new Profile(killer);
-	    killerProfile.setKillstreak(killerProfile.getKillstreak() + 1);
-	    killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + deadPlayer.getName() + ". "+ ChatColor.GREEN + "You are now on a " + ChatColor.GOLD + killerProfile.getKillstreak() + " killstreak.");
-	    giveCoins(killerProfile);
+	Profile killerProfile = Profile.getByPlayer(killer);
+	killerProfile.setKillstreak(killerProfile.getKillstreak() + 1);
+	killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + deadPlayer.getName() + ". "+ ChatColor.GREEN + "You are now on a " + ChatColor.GOLD + killerProfile.getKillstreak() + " killstreak.");
+	giveCoins(killerProfile);
 	    
-	}
 	resetKillstreak(deadPlayer);
 	deadPlayer.sendMessage(ChatColor.RED + "You died to " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + killer.getName() + ChatColor.RED + " and your killstreak is now " + ChatColor.GOLD + "" + ChatColor.BOLD + 0);
     }
     
     private void resetKillstreak(Player deadPlayer) {
-	if (Profile.getByPlayer(deadPlayer) != null) {
-	    Profile deadProfile = Profile.getByPlayer(deadPlayer);
-	    deadProfile.setKillstreak(0);
-	} else {
-	    Profile deadProfile = new Profile(deadPlayer);
-	    deadProfile.setKillstreak(0);
-	}
+	Profile deadProfile = new Profile(deadPlayer);
+	deadProfile.setKillstreak(0);
     }
     
     private void giveCoins(Profile profile) {
