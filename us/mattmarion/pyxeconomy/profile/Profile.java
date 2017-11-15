@@ -1,10 +1,13 @@
 package us.mattmarion.pyxeconomy.profile;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
+
+import us.mattmarion.pyxeconomy.PyxEconomy;
 
 public class Profile {
     
@@ -40,20 +43,36 @@ public class Profile {
 	return getByUUID(player.getUniqueId());
     }
     
+    public void save() {
+	PyxEconomy.data.set(uuid + ".name", player.getName());
+	PyxEconomy.data.set(uuid + ".balance", balance);
+	PyxEconomy.data.set(uuid + ".killstreak", killstreak);
+	
+	try {
+	    PyxEconomy.data.save(PyxEconomy.dataf);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
+    
     public UUID getUUID() {
 	return uuid;
+    }
+    
+    public void setBalance(double balance) {
+	this.balance = balance;
     }
     
     public double getBalance() {
 	return balance;
     }
     
-    public Player getPlayer() {
-	return player;
+    public void addBalance(double balance) {
+	this.balance += balance;
     }
     
-    public void setBalance(double balance) {
-	this.balance = balance;
+    public Player getPlayer() {
+	return player;
     }
 
     public double getMultiplier() {
