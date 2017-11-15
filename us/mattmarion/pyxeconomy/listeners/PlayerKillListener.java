@@ -17,7 +17,9 @@ public class PlayerKillListener implements Listener {
 	    return;
 	}
 	Player killer = deadPlayer.getKiller();
+	System.out.println("KILLER " + killer);
 	Profile killerProfile = Profile.getByPlayer(killer);
+	System.out.println("Killer profile: " + killerProfile.getPlayer().getName());
 	killerProfile.setKillstreak(killerProfile.getKillstreak() + 1);
 	killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + deadPlayer.getName() + ". "+ ChatColor.GREEN + "You are now on a " + ChatColor.GOLD + killerProfile.getKillstreak() + " killstreak.");
 	giveCoins(killerProfile);
@@ -27,7 +29,7 @@ public class PlayerKillListener implements Listener {
     }
     
     private void resetKillstreak(Player deadPlayer) {
-	Profile deadProfile = new Profile(deadPlayer);
+	Profile deadProfile = Profile.getByPlayer(deadPlayer);
 	deadProfile.setKillstreak(0);
     }
     

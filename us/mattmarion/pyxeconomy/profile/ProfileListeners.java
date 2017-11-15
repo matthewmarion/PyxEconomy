@@ -9,7 +9,8 @@ public class ProfileListeners implements Listener {
     
     @EventHandler
     public void on(PlayerJoinEvent event) {
-	new Profile(event.getPlayer());
+	Profile profile = new Profile(event.getPlayer());
+	System.out.println("Created profile for: " + profile.getPlayer().getName());
     }
     
     @EventHandler

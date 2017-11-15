@@ -29,7 +29,7 @@ public class Profile {
     
     public static Profile getByUUID(UUID uuid) {
 	for (Profile profile : profiles) {
-	    if (!(profile.getUUID().equals(uuid))) {
+	    if (profile.getUUID().equals(uuid)) {
 		return profile;
 	    }
 	}
