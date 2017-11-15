@@ -43,6 +43,11 @@ public class Profile {
 	return getByUUID(player.getUniqueId());
     }
     
+    public void load() {
+	this.balance = PyxEconomy.data.getDouble(uuid + ".balance");
+	this.killstreak = PyxEconomy.data.getInt(uuid + ".killstreak");
+    }
+    
     public void save() {
 	PyxEconomy.data.set(uuid + ".name", player.getName());
 	PyxEconomy.data.set(uuid + ".balance", balance);

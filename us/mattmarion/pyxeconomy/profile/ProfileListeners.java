@@ -10,7 +10,7 @@ public class ProfileListeners implements Listener {
     @EventHandler
     public void on(PlayerJoinEvent event) {
 	Profile profile = new Profile(event.getPlayer());
-	System.out.println("Created profile for: " + profile.getPlayer().getName());
+	profile.load();
     }
     
     @EventHandler
@@ -19,6 +19,7 @@ public class ProfileListeners implements Listener {
 	if (quitProfile == null) {
 	    return;
 	}
+	quitProfile.save();
 	Profile.getProfiles().remove(quitProfile);
     }
 
