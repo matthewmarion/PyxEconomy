@@ -41,10 +41,10 @@ public class PlayerKillListener implements Listener {
 	System.out.println("Multiplier here is: " + multiplier);
 	if (killstreak % 10 == 0) {
 	    profile.addBalance(4 * multiplier);
-	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + 4 * multiplier + " coins");
+	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + ChatColor.BOLD + 4 * multiplier + " coins");
 	} else {
 	    profile.addBalance(1 * multiplier);
-	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + 1 * multiplier + " coins");
+	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + ChatColor.BOLD + 1 * multiplier + " coins");
 	}
 	profile.save();
     }
