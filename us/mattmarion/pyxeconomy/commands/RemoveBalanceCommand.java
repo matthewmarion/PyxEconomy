@@ -10,14 +10,14 @@ import org.bukkit.entity.Player;
 import us.mattmarion.pyxeconomy.profile.Profile;
 import us.mattmarion.pyxeconomy.utils.MessageUtils;
 
-public class GiveBalanceCommand implements CommandExecutor {
-
-    private final String usage = ChatColor.RED + "/pyxcoin give <name> <amount>";
+public class RemoveBalanceCommand implements CommandExecutor {
+    
+    private final String usage = ChatColor.RED + "/pyxcoin remove <name> <amount>";
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-	if (args[0].equalsIgnoreCase("give")) {
-	    if (!sender.hasPermission("pyxcoin.give")) {
+	if (args[0].equalsIgnoreCase("remove")) {
+	    if (!sender.hasPermission("pyxcoin.remove")) {
 		sender.sendMessage(MessageUtils.NO_PERMISSION_MESSAGE);
 	    }
 		
@@ -35,10 +35,10 @@ public class GiveBalanceCommand implements CommandExecutor {
 	    try {
 		double amount = Double.parseDouble(args[2]);
 		Profile targetProfile = Profile.getByPlayer(target);
-		targetProfile.addBalance(amount);
+		targetProfile.removeBalance(amount);
 		
 		targetProfile.save();
-		target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + amount + ChatColor.GREEN + " coins have been added to your balance!");
+		target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + amount + ChatColor.GREEN + " coins have been removed from your balance!");
 		
 		return true;
 	    } catch (NumberFormatException e) {
@@ -48,4 +48,5 @@ public class GiveBalanceCommand implements CommandExecutor {
 	}
 	return false;
     }
+
 }

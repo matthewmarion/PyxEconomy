@@ -10,18 +10,18 @@ import org.bukkit.entity.Player;
 import us.mattmarion.pyxeconomy.profile.Profile;
 import us.mattmarion.pyxeconomy.utils.MessageUtils;
 
-public class GiveBalanceCommand implements CommandExecutor {
-
-    private final String usage = ChatColor.RED + "/pyxcoin give <name> <amount>";
+public class ResetBalanceCommand implements CommandExecutor {
+    
+    private final String usage = ChatColor.RED + "/pyxcoin reset <name>";
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-	if (args[0].equalsIgnoreCase("give")) {
-	    if (!sender.hasPermission("pyxcoin.give")) {
+	if (args[0].equalsIgnoreCase("reset")) {
+	    if (!sender.hasPermission("pyxcoin.reset")) {
 		sender.sendMessage(MessageUtils.NO_PERMISSION_MESSAGE);
-	    }
+		}
 		
-	    if (args.length != 3) {
+	    if (args.length != 2) {
 		sender.sendMessage(usage);
 		return false;
 	    }
@@ -32,20 +32,16 @@ public class GiveBalanceCommand implements CommandExecutor {
 		return false;
 	    }
 	    
-	    try {
-		double amount = Double.parseDouble(args[2]);
-		Profile targetProfile = Profile.getByPlayer(target);
-		targetProfile.addBalance(amount);
-		
-		targetProfile.save();
-		target.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + amount + ChatColor.GREEN + " coins have been added to your balance!");
-		
-		return true;
-	    } catch (NumberFormatException e) {
-		sender.sendMessage(ChatColor.RED + "Amount must be numeric.");
-		return false;
-	    }
+	    Profile profile = Profile.getByPlayer(target);
+	    profile.setBalance(0);
+	    profile.save();
+	    
+	    target.sendMessage(ChatColor.GREEN + "You're balance has been reset. You current coin balance is now: " + ChatColor.GOLD + ChatColor.BOLD + profile.getBalance());
+	    
+	    return true;
 	}
+	
 	return false;
     }
+
 }

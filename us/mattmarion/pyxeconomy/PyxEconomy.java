@@ -8,7 +8,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import us.mattmarion.pyxeconomy.commands.BalanceCommand;
 import us.mattmarion.pyxeconomy.commands.GiveBalanceCommand;
+import us.mattmarion.pyxeconomy.commands.RemoveBalanceCommand;
+import us.mattmarion.pyxeconomy.commands.ResetBalanceCommand;
 import us.mattmarion.pyxeconomy.listeners.PlayerKillListener;
 import us.mattmarion.pyxeconomy.profile.ProfileListeners;
 
@@ -32,7 +35,10 @@ public class PyxEconomy extends JavaPlugin {
     }
     
     private void registerCommands() {
-	getCommand("pyxcoin").setExecutor(new GiveBalanceCommand());
+	getCommand("pyxcoin").setExecutor(new BalanceCommand());
+	//getCommand("pyxcoin").setExecutor(new GiveBalanceCommand());
+	//getCommand("pyxcoin").setExecutor(new RemoveBalanceCommand());
+	//getCommand("pyxcoin").setExecutor(new ResetBalanceCommand());
     }
     
     private void loadConfig() {

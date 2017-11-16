@@ -76,6 +76,10 @@ public class Profile {
 	this.balance += balance;
     }
     
+    public void removeBalance(double amount) {
+	this.balance -= balance;
+    }
+    
     public Player getPlayer() {
 	return player;
     }
