@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import us.mattmarion.pyxeconomy.commands.GiveBalanceCommand;
 import us.mattmarion.pyxeconomy.listeners.PlayerKillListener;
 import us.mattmarion.pyxeconomy.profile.ProfileListeners;
 
@@ -22,11 +23,16 @@ public class PyxEconomy extends JavaPlugin {
 	instance = this;
 	loadConfig();
 	registerEvents();
+	registerCommands();
     }
     
     private void registerEvents() {
 	getServer().getPluginManager().registerEvents(new ProfileListeners(), this);
 	getServer().getPluginManager().registerEvents(new PlayerKillListener(), this);
+    }
+    
+    private void registerCommands() {
+	getCommand("pyxcoin").setExecutor(new GiveBalanceCommand());
     }
     
     private void loadConfig() {
