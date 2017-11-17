@@ -77,7 +77,7 @@ public class Profile {
     }
     
     public void removeBalance(double amount) {
-	this.balance -= balance;
+	this.balance -= amount;
     }
     
     public Player getPlayer() {
