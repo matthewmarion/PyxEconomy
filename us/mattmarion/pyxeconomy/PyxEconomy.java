@@ -15,6 +15,7 @@ import us.mattmarion.pyxeconomy.commands.RemoveBalanceCommand;
 import us.mattmarion.pyxeconomy.commands.ResetBalanceCommand;
 import us.mattmarion.pyxeconomy.listeners.PlayerKillListener;
 import us.mattmarion.pyxeconomy.profile.ProfileListeners;
+import us.mattmarion.pyxeconomy.shop.ArtemisBow;
 
 public class PyxEconomy extends JavaPlugin {
     
@@ -33,6 +34,7 @@ public class PyxEconomy extends JavaPlugin {
     private void registerEvents() {
 	getServer().getPluginManager().registerEvents(new ProfileListeners(), this);
 	getServer().getPluginManager().registerEvents(new PlayerKillListener(), this);
+	getServer().getPluginManager().registerEvents(new ArtemisBow(), this);
     }
     
     private void registerCommands() {
