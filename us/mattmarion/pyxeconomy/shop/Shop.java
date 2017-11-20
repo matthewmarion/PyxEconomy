@@ -2,11 +2,9 @@ package us.mattmarion.pyxeconomy.shop;
 
 import java.io.IOException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
-import org.bukkit.inventory.Inventory;
 
 import net.md_5.bungee.api.ChatColor;
 import us.mattmarion.pyxeconomy.PyxEconomy;

@@ -9,7 +9,7 @@ import us.mattmarion.pyxeconomy.shop.items.ArtemisBow;
 
 public class ShopInventory {
     
-    private Inventory inv;
+    private static Inventory inv;
     
     public ShopInventory() {
 	inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Shop");
@@ -17,7 +17,7 @@ public class ShopInventory {
 	inv.setItem(0, artemis.getItem());
     }
     
-    public Inventory getInventory() {
+    public static Inventory getInventory() {
    	return inv;
     }      
 }

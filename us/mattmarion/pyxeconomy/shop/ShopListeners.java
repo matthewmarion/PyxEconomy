@@ -3,6 +3,7 @@ package us.mattmarion.pyxeconomy.shop;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 public class ShopListeners implements Listener {
@@ -17,6 +18,10 @@ public class ShopListeners implements Listener {
 	event.setCancelled(true);
     }
     
-    
+    @EventHandler
+    public void on(InventoryClickEvent event) {
+	if (event.getInventory() != ShopInventory.getInventory()) return;
+	    
+    }
 
 }
