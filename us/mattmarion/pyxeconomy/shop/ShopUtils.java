@@ -1,11 +1,8 @@
 package us.mattmarion.pyxeconomy.shop;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_11_R1.entity.CraftEntity;
-import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
-import net.minecraft.server.v1_11_R1.NBTTagCompound;
 
 public class ShopUtils {
     public static boolean itemHasName(String name, ItemStack item) {

@@ -1,4 +1,4 @@
-package us.mattmarion.pyxeconomy.shop;
+package us.mattmarion.pyxeconomy.shop.items;
 
 import java.util.Random;
 
@@ -11,6 +11,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import us.mattmarion.pyxeconomy.shop.IShopItem;
+import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class ArtemisBow implements IShopItem, Listener {
     
@@ -28,7 +31,7 @@ public class ArtemisBow implements IShopItem, Listener {
     public ItemStack getItem() {
 	ItemStack item = new ItemStack(Material.BOW);
 	ItemMeta meta = item.getItemMeta();
-	meta.setDisplayName(name);
+	meta.setDisplayName(ChatColor.LIGHT_PURPLE + name);
 	item.setItemMeta(meta);
 	return item;
     }

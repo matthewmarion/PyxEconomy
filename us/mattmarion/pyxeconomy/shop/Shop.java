@@ -2,10 +2,13 @@ package us.mattmarion.pyxeconomy.shop;
 
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
+import org.bukkit.inventory.Inventory;
 
+import net.md_5.bungee.api.ChatColor;
 import us.mattmarion.pyxeconomy.PyxEconomy;
 
 public class Shop {
@@ -58,6 +61,7 @@ public class Shop {
     public void create() {
 	Villager npc = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
 	npc.getLocation().setDirection(location.getDirection());
+	npc.setCustomName(ChatColor.GREEN + name + " Shop");
 	npc.setAI(false);
     }
 }
