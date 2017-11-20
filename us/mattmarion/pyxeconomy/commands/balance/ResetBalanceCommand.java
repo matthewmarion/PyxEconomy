@@ -1,10 +1,11 @@
-package us.mattmarion.pyxeconomy.commands;
+package us.mattmarion.pyxeconomy.commands.balance;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import us.mattmarion.pyxeconomy.commands.PyxCommandExecutor;
 import us.mattmarion.pyxeconomy.profile.Profile;
 import us.mattmarion.pyxeconomy.utils.MessageUtils;
 

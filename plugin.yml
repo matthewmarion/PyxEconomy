@@ -5,5 +5,5 @@ main: us.mattmarion.pyxeconomy.PyxEconomy
 author: Matt Marion (HM04)
 
 commands:
-  pyxcoin:
-    description: Pyxcoin command.
+  pyx:
+    description: Pyx command.

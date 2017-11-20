@@ -8,11 +8,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import us.mattmarion.pyxeconomy.commands.BalanceCommand;
 import us.mattmarion.pyxeconomy.commands.CommandHandler;
-import us.mattmarion.pyxeconomy.commands.GiveBalanceCommand;
-import us.mattmarion.pyxeconomy.commands.RemoveBalanceCommand;
-import us.mattmarion.pyxeconomy.commands.ResetBalanceCommand;
+import us.mattmarion.pyxeconomy.commands.balance.BalanceCommand;
+import us.mattmarion.pyxeconomy.commands.balance.GiveBalanceCommand;
+import us.mattmarion.pyxeconomy.commands.balance.RemoveBalanceCommand;
+import us.mattmarion.pyxeconomy.commands.balance.ResetBalanceCommand;
 import us.mattmarion.pyxeconomy.listeners.PlayerKillListener;
 import us.mattmarion.pyxeconomy.profile.ProfileListeners;
 import us.mattmarion.pyxeconomy.shop.ArtemisBow;
@@ -21,8 +21,8 @@ public class PyxEconomy extends JavaPlugin {
     
     private static PyxEconomy instance;
     
-    public static File dataf, configf;
-    public static FileConfiguration data, config;
+    public static File dataf, configf, shopdataf;
+    public static FileConfiguration data, config, shopdata;
     
     public final void onEnable() {
 	instance = this;
@@ -38,13 +38,14 @@ public class PyxEconomy extends JavaPlugin {
     }
     
     private void registerCommands() {
-	getCommand("pyxcoin").setExecutor(new CommandHandler());
+	getCommand("pyx").setExecutor(new CommandHandler());
     }
     
     private void loadConfig() {
 
 	dataf = new File(getDataFolder(), "database.yml");
 	configf = new File(getDataFolder(), "config.yml");
+	shopdataf = new File(getDataFolder(), "shopdata.yml");
 
 	if (!dataf.exists()) {
 		dataf.getParentFile().mkdirs();
@@ -54,9 +55,14 @@ public class PyxEconomy extends JavaPlugin {
 		configf.getParentFile().mkdirs();
 		saveResource("config.yml", false);
 	}
+	if (!shopdataf.exists()) {
+		shopdataf.getParentFile().mkdirs();
+		saveResource("shopdata.yml", false);
+	}
 
 	data = new YamlConfiguration();
 	config = new YamlConfiguration();
+	shopdata = new YamlConfiguration();
 	try {
 		try {
 			data.load(dataf);
@@ -77,11 +83,24 @@ public class PyxEconomy extends JavaPlugin {
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
+	try {
+		try {
+			shopdata.load(shopdataf);
+		} catch (InvalidConfigurationException e) {
 
+			e.printStackTrace();
+		}
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
     }
     
     public static FileConfiguration getDataConfig() {
 	return PyxEconomy.data;
+    }
+    
+    public static FileConfiguration getShopDataConfig() {
+	return PyxEconomy.shopdata;
     }
 
     @Override
