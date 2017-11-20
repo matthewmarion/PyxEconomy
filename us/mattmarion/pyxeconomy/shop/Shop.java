@@ -1,5 +1,7 @@
 package us.mattmarion.pyxeconomy.shop;
 
+import java.io.IOException;
+
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
@@ -45,7 +47,12 @@ public class Shop {
 	PyxEconomy.shopdata.set(name + ".location" + ".x", coords[0]);
 	PyxEconomy.shopdata.set(name + ".location" + ".y", coords[1]);
 	PyxEconomy.shopdata.set(name + ".location" + ".z", coords[2]);
-	PyxEconomy.shopdata.set(name + ".location" + ".world", location.getWorld().toString());
+	PyxEconomy.shopdata.set(name + ".location" + ".world", location.getWorld().getName());
+	try {
+	    PyxEconomy.shopdata.save(PyxEconomy.shopdataf);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
     }
     
     public void create() {
