@@ -48,9 +48,6 @@ public class ShopUtils {
 	}
 	long startTime = cooldownPlayers.get(player.getUniqueId()) / 1000;
 	long currentTime = System.currentTimeMillis() / 1000;
-	System.out.println("Start: " + startTime);
-	System.out.println("Current: " + currentTime);
-	System.out.println("Difference: " + (currentTime - startTime));
 	if ((currentTime - startTime) >= cooldownTime) {
 	    return false;
 	}

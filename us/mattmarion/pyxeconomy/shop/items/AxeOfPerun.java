@@ -77,8 +77,6 @@ public class AxeOfPerun implements IShopItem, Listener {
 	    return;
 	}
 	boolean playerIsOnCooldown = ShopUtils.playerIsOnCooldown(player, playersOnCooldown, cooldown);
-	System.out.println(playerIsOnCooldown);
-	System.out.println(playersOnCooldown);
 	if (playerIsOnCooldown) {
 	    player.sendMessage("On cooldown");
 	    return;
