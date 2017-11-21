@@ -1,5 +1,6 @@
 package us.mattmarion.pyxeconomy.shop.items;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -17,9 +18,15 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class ArtemisBow implements IShopItem, Listener {
     
-    private final String name = "Artemis' Bow"; 
+    private final String name = ChatColor.LIGHT_PURPLE + "Artemis' Bow"; 
     private final double price = 75;
+    private final String loreString = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
+    private final List<String> lore = new ArrayList<String>();
 
+    public ArtemisBow() {
+	ShopUtils.getItems().put(name, price);
+    }
+    
     public String getName() {
 	return name;
     }
@@ -31,7 +38,9 @@ public class ArtemisBow implements IShopItem, Listener {
     public ItemStack getItem() {
 	ItemStack item = new ItemStack(Material.BOW);
 	ItemMeta meta = item.getItemMeta();
-	meta.setDisplayName(ChatColor.LIGHT_PURPLE + name);
+	meta.setDisplayName(name);
+	lore.add(loreString);
+	meta.setLore(lore);
 	item.setItemMeta(meta);
 	return item;
     }
