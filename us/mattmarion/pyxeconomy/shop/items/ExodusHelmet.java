@@ -21,7 +21,8 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class ExodusHelmet implements IShopItem, Listener {
     
-    private final String name = ChatColor.AQUA + "Exodus Helmet"; 
+    private final String name = ChatColor.AQUA + "Exodus Helmet";
+    private final String configName = "EXODUS";
     private final double price = 100;
     private final String priceLore = ChatColor.GOLD + "100" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Regeneration when you land a bow shot!";
@@ -30,7 +31,8 @@ public class ExodusHelmet implements IShopItem, Listener {
 
     public ExodusHelmet() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
     
     @Override

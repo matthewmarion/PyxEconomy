@@ -20,6 +20,7 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 public class Cornucopia implements IShopItem, Listener {
 
     private final String name = ChatColor.GOLD + "Cornucopia"; 
+    private final String configName = "CORN";
     private final double price = 20;
     private final String priceLore = ChatColor.GOLD + "20" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "7 seconds of Regeneration 1 and 10 minutes of Saturation.";
@@ -28,7 +29,8 @@ public class Cornucopia implements IShopItem, Listener {
     
     public Cornucopia() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

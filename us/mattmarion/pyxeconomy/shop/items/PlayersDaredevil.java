@@ -25,11 +25,14 @@ import org.bukkit.material.MonsterEggs;
 import org.bukkit.material.SpawnEgg;
 import org.spigotmc.event.entity.EntityMountEvent;
 import org.bukkit.inventory.ItemStack;
+
+import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class PlayersDaredevil implements Listener {
+public class PlayersDaredevil implements Listener, IShopItem {
 
-    private final String name = ChatColor.DARK_PURPLE + "Daredevil"; 
+    private final String name = ChatColor.DARK_PURPLE + "Daredevil";
+    private final String configName = "DARE";
     private final double price = 150;
     private final String priceLore = ChatColor.GOLD + "150" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Personal deadly steed.";
@@ -37,7 +40,8 @@ public class PlayersDaredevil implements Listener {
     private ItemStack item; 
     
     public PlayersDaredevil() {
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     public String getName() {
@@ -48,7 +52,7 @@ public class PlayersDaredevil implements Listener {
 	return price;
     }
 
-    public void createItem(Player player) {
+    public void createNewItem(Player player) {
 	item = new ItemStack(Material.MONSTER_EGG);
 	ItemMeta meta = item.getItemMeta();
 	meta.setDisplayName(ChatColor.DARK_PURPLE + player.getName() + "'s " + name);
@@ -114,5 +118,10 @@ public class PlayersDaredevil implements Listener {
 	horse.setMaxHealth(500);
 	horse.setHealth(500);
 	daredevils.put(player.getUniqueId(), horse);
+    }
+
+    @Override
+    public void createItem() {
+	// TODO Auto-generated method stub
     }
 }

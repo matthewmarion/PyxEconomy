@@ -20,6 +20,7 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 public class DeathsScythe implements IShopItem, Listener {
     
     private final String name = ChatColor.DARK_RED + "Death's Sycthe"; 
+    private final String configName = "SCYTHE";
     private final double price = 50;
     private final String priceLore = ChatColor.GOLD + "50" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Removes 20% of the enemies current health.";
@@ -28,7 +29,8 @@ public class DeathsScythe implements IShopItem, Listener {
     
     public DeathsScythe() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

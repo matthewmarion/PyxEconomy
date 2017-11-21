@@ -24,6 +24,7 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 public class Anduril implements IShopItem, Listener {
 
     private final String name = ChatColor.DARK_AQUA + "Anduril"; 
+    private final String configName = "ANDURIL";
     private final double price = 50;
     private final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Gives you Speed 1 and Resistance 1, while you hold it.";
@@ -32,7 +33,8 @@ public class Anduril implements IShopItem, Listener {
     
     public Anduril() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

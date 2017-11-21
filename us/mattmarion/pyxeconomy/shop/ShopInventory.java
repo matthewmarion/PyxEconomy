@@ -52,7 +52,7 @@ public class ShopInventory {
 	DeathsScythe ds = new DeathsScythe();
 	inv.setItem(11, ds.getItem());
 	PlayersDaredevil pd = new PlayersDaredevil();
-	pd.createItem(player);
+	pd.createNewItem(player);
 	inv.setItem(12, pd.getItem());
 	FlaskOfIchor fi = new FlaskOfIchor();
 	inv.setItem(13, fi.getItem());

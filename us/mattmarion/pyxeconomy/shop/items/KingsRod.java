@@ -15,6 +15,7 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 public class KingsRod implements IShopItem {
     
     private final String name = ChatColor.GREEN + "King's Rod"; 
+    private final String configName = "KINGSROD";
     private final double price = 25;
     private final String priceLore = ChatColor.GOLD + "25" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Your majesty's rod.";
@@ -23,7 +24,8 @@ public class KingsRod implements IShopItem {
     
     public KingsRod() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

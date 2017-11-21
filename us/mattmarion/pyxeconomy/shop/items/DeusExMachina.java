@@ -19,7 +19,8 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class DeusExMachina implements IShopItem, Listener {
     
-    private final String name = ChatColor.LIGHT_PURPLE + "Deus Ex Machina"; 
+    private final String name = ChatColor.LIGHT_PURPLE + "Deus Ex Machina";
+    private final String configName = "DEUS";
     private final double price = 10;
     private final String priceLore = ChatColor.GOLD + "10" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Gives you Resistance 5 (Invincibility) for 10 seconds.";
@@ -28,7 +29,8 @@ public class DeusExMachina implements IShopItem, Listener {
     
     public DeusExMachina() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

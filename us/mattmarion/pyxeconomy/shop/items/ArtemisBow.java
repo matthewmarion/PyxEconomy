@@ -20,6 +20,7 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 public class ArtemisBow implements IShopItem, Listener {
     
     private final String name = ChatColor.LIGHT_PURPLE + "Artemis' Bow"; 
+    private final String configName = "ARTEMIS";
     private final double price = 75;
     private final String priceString = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "25% chance of shooting a homing arrow.";
@@ -29,7 +30,8 @@ public class ArtemisBow implements IShopItem, Listener {
 
     public ArtemisBow() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
     
     public String getName() {

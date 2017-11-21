@@ -10,7 +10,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class ShopUtils {
     
-    private static final HashMap<String, Double> ITEMS = new HashMap<String, Double>();
+    private static final HashMap<String, Double> ITEM_PRICES = new HashMap<String, Double>();
+    private static final HashMap<String, IShopItem> ITEMS = new HashMap<String, IShopItem>();
     
     public static boolean itemHasName(String name, ItemStack item) {
 	if (item == null) return false;
@@ -23,10 +24,19 @@ public class ShopUtils {
     }
     
     public static double getItemPriceFromName(String name) {
-	if (!ITEMS.containsKey(name)) {
+	if (!ITEM_PRICES.containsKey(name)) {
 	    return 0;
 	}
-	return ITEMS.get(name);
+	return ITEM_PRICES.get(name);
+    }
+    
+    public static ItemStack getItemFromName(String name) {
+	if (!ITEMS.containsKey(name)) {
+	    return null;
+	}
+	IShopItem shopItem = ITEMS.get(name);
+	ItemStack itemStack = shopItem.getItem();
+	return itemStack;
     }
     
     public static double[] parseLocation(Location location) {
@@ -37,7 +47,11 @@ public class ShopUtils {
 	return coords;
     }
 
-    public static HashMap<String, Double> getItems() {
+    public static HashMap<String, Double> getItemPrices() {
+	return ITEM_PRICES;
+    }
+    
+    public static HashMap<String, IShopItem> getItems() {
 	return ITEMS;
     }
     

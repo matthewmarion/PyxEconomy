@@ -21,7 +21,8 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class Excalibur implements IShopItem, Listener {
 
-    private final String name = ChatColor.DARK_GREEN + "Excalibur"; 
+    private final String name = ChatColor.DARK_GREEN + "Excalibur";
+    private final String configName = "EXCALIBUR";
     private final double price = 75;
     private final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "TNT explosion on the enemy.";
@@ -30,7 +31,8 @@ public class Excalibur implements IShopItem, Listener {
     
     public Excalibur() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

@@ -14,7 +14,8 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class HideOfLeviathan implements IShopItem {
 
-    private final String name = ChatColor.BLUE + "Hide of Leviathan"; 
+    private final String name = ChatColor.BLUE + "Hide of Leviathan";
+    private final String configName = "HIDES";
     private final double price = 30;
     private final String priceLore = ChatColor.GOLD + "30" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Extracted from the mythical Leviathan.";
@@ -23,7 +24,8 @@ public class HideOfLeviathan implements IShopItem {
     
     public HideOfLeviathan() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

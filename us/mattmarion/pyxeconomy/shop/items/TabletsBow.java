@@ -15,6 +15,7 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 public class TabletsBow implements IShopItem {
     
     private final String name = ChatColor.RED + "Tablet's Bow"; 
+    private final String configName = "TABLETS_BOW";
     private final double price = 50;
     private final String priceLore = ChatColor.GOLD + "50" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GRAY + "Tablet's deadly bow.";
@@ -23,7 +24,8 @@ public class TabletsBow implements IShopItem {
     
     public TabletsBow() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override

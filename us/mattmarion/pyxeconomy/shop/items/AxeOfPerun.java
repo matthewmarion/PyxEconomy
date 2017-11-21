@@ -21,7 +21,8 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class AxeOfPerun implements IShopItem, Listener {
     
-    private final String name = ChatColor.DARK_PURPLE + "Axe of Perun"; 
+    private final String name = ChatColor.DARK_PURPLE + "Axe of Perun";
+    private final String configName = "PERUN";
     private final double price = 75;
     private final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
     private final String description = ChatColor.GREEN + "Strikes your enemy with lightning upon hitting them.";
@@ -30,7 +31,8 @@ public class AxeOfPerun implements IShopItem, Listener {
     
     public AxeOfPerun() {
 	createItem();
-	ShopUtils.getItems().put(name, price);
+	ShopUtils.getItemPrices().put(name, price);
+	ShopUtils.getItems().put(configName, this);
     }
    
     @Override
