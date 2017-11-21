@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,10 +21,14 @@ public class ArtemisBow implements IShopItem, Listener {
     
     private final String name = ChatColor.LIGHT_PURPLE + "Artemis' Bow"; 
     private final double price = 75;
-    private final String loreString = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
+    private final String priceString = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
+    private final String description = ChatColor.GREEN + "25% chance of shooting a homing arrow.";
     private final List<String> lore = new ArrayList<String>();
+    private ItemStack item;
+    
 
     public ArtemisBow() {
+	createItem();
 	ShopUtils.getItems().put(name, price);
     }
     
@@ -34,14 +39,19 @@ public class ArtemisBow implements IShopItem, Listener {
     public double getPrice() {
 	return price;
     }
-
-    public ItemStack getItem() {
-	ItemStack item = new ItemStack(Material.BOW);
+    
+    public void createItem() {
+	item = new ItemStack(Material.BOW);
+	item.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
 	ItemMeta meta = item.getItemMeta();
 	meta.setDisplayName(name);
-	lore.add(loreString);
+	lore.add(priceString);
+	lore.add(description);
 	meta.setLore(lore);
 	item.setItemMeta(meta);
+    }
+
+    public ItemStack getItem() {
 	return item;
     }
     

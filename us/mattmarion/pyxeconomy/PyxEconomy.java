@@ -9,14 +9,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import us.mattmarion.pyxeconomy.commands.CommandHandler;
-import us.mattmarion.pyxeconomy.commands.balance.BalanceCommand;
-import us.mattmarion.pyxeconomy.commands.balance.GiveBalanceCommand;
-import us.mattmarion.pyxeconomy.commands.balance.RemoveBalanceCommand;
-import us.mattmarion.pyxeconomy.commands.balance.ResetBalanceCommand;
 import us.mattmarion.pyxeconomy.listeners.PlayerKillListener;
 import us.mattmarion.pyxeconomy.profile.ProfileListeners;
 import us.mattmarion.pyxeconomy.shop.ShopListeners;
 import us.mattmarion.pyxeconomy.shop.items.ArtemisBow;
+import us.mattmarion.pyxeconomy.shop.items.AxeOfPerun;
+import us.mattmarion.pyxeconomy.shop.items.ExodusHelmet;
 
 public class PyxEconomy extends JavaPlugin {
     
@@ -36,6 +34,8 @@ public class PyxEconomy extends JavaPlugin {
 	getServer().getPluginManager().registerEvents(new ProfileListeners(), this);
 	getServer().getPluginManager().registerEvents(new PlayerKillListener(), this);
 	getServer().getPluginManager().registerEvents(new ArtemisBow(), this);
+	getServer().getPluginManager().registerEvents(new AxeOfPerun(), this);
+	getServer().getPluginManager().registerEvents(new ExodusHelmet(), this);
 	getServer().getPluginManager().registerEvents(new ShopListeners(),this);
     }
     
