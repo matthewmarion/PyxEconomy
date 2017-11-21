@@ -78,6 +78,7 @@ public class Anduril implements IShopItem, Listener {
 	boolean oldItemIsAnduril = ShopUtils.itemHasName(name, oldItem);
 	if (oldItemIsAnduril) {
 	    giveEffects(player, 40);
+	    return;
 	}
 	boolean itemIsAnduril = ShopUtils.itemHasName(name, holdingItem);
 	if (!itemIsAnduril) {

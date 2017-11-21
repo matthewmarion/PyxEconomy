@@ -32,7 +32,7 @@ public class ShopListeners implements Listener {
 	if (villager.getCustomName() == null) {
 	    return;
 	}
-	ShopInventory shopInv = new ShopInventory();
+	ShopInventory shopInv = new ShopInventory(event.getPlayer());
 	event.getPlayer().openInventory(shopInv.getInventory());
 	event.setCancelled(true);
     }

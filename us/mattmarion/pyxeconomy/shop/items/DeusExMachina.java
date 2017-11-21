@@ -43,7 +43,7 @@ public class DeusExMachina implements IShopItem, Listener {
 
     @Override
     public void createItem() {
-	item = new ItemStack(Material.POTION, 3);
+	item = new ItemStack(Material.POTION);
 	ItemMeta meta = item.getItemMeta();
 	meta.setDisplayName(name);
 	lore.add(priceLore);
