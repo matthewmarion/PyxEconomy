@@ -1,9 +1,11 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -57,7 +59,8 @@ public class Excalibur implements IShopItem, Listener {
 	return item;
     }
     
-    private Set<Player> invinciblePlayers = new HashSet<>();
+    public HashMap<UUID, Long> playersOnCooldown = new HashMap<>();
+    private int cooldown = 8;
     @EventHandler
     public void on(EntityDamageByEntityEvent event) {
 	if (!(event.getDamager() instanceof Player)) {
@@ -69,18 +72,28 @@ public class Excalibur implements IShopItem, Listener {
 	}
 	
 	Player player = (Player) event.getDamager();
-	boolean usedAxeOfPerun = ShopUtils.itemHasName(name, player.getItemInHand());
-	if (!usedAxeOfPerun) {
+	boolean usedExcalibur = ShopUtils.itemHasName(name, player.getItemInHand());
+	if (!usedExcalibur) {
+	    return;
+	}
+	boolean playerIsOnCooldown = ShopUtils.playerIsOnCooldown(player, playersOnCooldown, cooldown);
+	if (playerIsOnCooldown) {
 	    return;
 	}
 	Player attackedPlayer = (Player) event.getEntity();
-	invinciblePlayers.add(player);
-	attackedPlayer.getLocation().getWorld().strikeLightningEffect(attackedPlayer.getLocation());
+	attackedPlayer.getLocation().getWorld().createExplosion(attackedPlayer.getLocation(), 0, false);
 	if (attackedPlayer.getHealth() <= 6) {
 	    event.setDamage(20);
+	    putPlayerOnCooldown(player, 8);
 	    return;
 	}
 	attackedPlayer.setHealth(attackedPlayer.getHealth() - 6);
+	putPlayerOnCooldown(player, 8);
+    }
+    
+    private void putPlayerOnCooldown(Player player, int duration) {
+	long currentTime = System.currentTimeMillis();
+	playersOnCooldown.put(player.getUniqueId(), currentTime);
     }
 
 }

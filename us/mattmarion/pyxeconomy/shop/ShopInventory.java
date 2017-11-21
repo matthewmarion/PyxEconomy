@@ -4,8 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 
+import us.mattmarion.pyxeconomy.shop.items.Anduril;
 import us.mattmarion.pyxeconomy.shop.items.ArtemisBow;
 import us.mattmarion.pyxeconomy.shop.items.AxeOfPerun;
+import us.mattmarion.pyxeconomy.shop.items.Cornucopia;
+import us.mattmarion.pyxeconomy.shop.items.DeusExMachina;
+import us.mattmarion.pyxeconomy.shop.items.Excalibur;
 import us.mattmarion.pyxeconomy.shop.items.ExodusHelmet;
 import us.mattmarion.pyxeconomy.shop.items.HideOfLeviathan;
 import us.mattmarion.pyxeconomy.shop.items.TabletsBow;
@@ -30,6 +34,14 @@ public class ShopInventory {
 	inv.setItem(4, tb.getItem());
 	AxeOfPerun ap = new AxeOfPerun();
 	inv.setItem(5, ap.getItem());
+	Excalibur ex = new Excalibur();
+	inv.setItem(6, ex.getItem());
+	Anduril an = new Anduril();
+	inv.setItem(7, an.getItem());
+	Cornucopia cn = new Cornucopia();
+	inv.setItem(8, cn.getItem());
+	DeusExMachina dex = new DeusExMachina();
+	inv.setItem(9, dex.getItem());
     }
     
     public static Inventory getInventory() {

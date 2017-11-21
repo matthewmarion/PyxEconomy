@@ -12,8 +12,12 @@ import us.mattmarion.pyxeconomy.commands.CommandHandler;
 import us.mattmarion.pyxeconomy.listeners.PlayerKillListener;
 import us.mattmarion.pyxeconomy.profile.ProfileListeners;
 import us.mattmarion.pyxeconomy.shop.ShopListeners;
+import us.mattmarion.pyxeconomy.shop.items.Anduril;
 import us.mattmarion.pyxeconomy.shop.items.ArtemisBow;
 import us.mattmarion.pyxeconomy.shop.items.AxeOfPerun;
+import us.mattmarion.pyxeconomy.shop.items.Cornucopia;
+import us.mattmarion.pyxeconomy.shop.items.DeusExMachina;
+import us.mattmarion.pyxeconomy.shop.items.Excalibur;
 import us.mattmarion.pyxeconomy.shop.items.ExodusHelmet;
 
 public class PyxEconomy extends JavaPlugin {
@@ -35,8 +39,12 @@ public class PyxEconomy extends JavaPlugin {
 	getServer().getPluginManager().registerEvents(new PlayerKillListener(), this);
 	getServer().getPluginManager().registerEvents(new ArtemisBow(), this);
 	getServer().getPluginManager().registerEvents(new AxeOfPerun(), this);
+	getServer().getPluginManager().registerEvents(new Excalibur(), this);
+	getServer().getPluginManager().registerEvents(new Anduril(), this);
 	getServer().getPluginManager().registerEvents(new ExodusHelmet(), this);
 	getServer().getPluginManager().registerEvents(new ShopListeners(),this);
+	getServer().getPluginManager().registerEvents(new Cornucopia(), this);
+	getServer().getPluginManager().registerEvents(new DeusExMachina(), this);
     }
     
     private void registerCommands() {
