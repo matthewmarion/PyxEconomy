@@ -1,8 +1,10 @@
 package us.mattmarion.pyxeconomy.shop;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 
@@ -37,5 +39,21 @@ public class ShopUtils {
 
     public static HashMap<String, Double> getItems() {
 	return ITEMS;
+    }
+    
+    
+    public static boolean playerIsOnCooldown(Player player, HashMap<UUID, Long> cooldownPlayers, int cooldownTime) {
+	if (!cooldownPlayers.containsKey(player.getUniqueId())) {
+	    return false;
+	}
+	long startTime = cooldownPlayers.get(player.getUniqueId()) / 1000;
+	long currentTime = System.currentTimeMillis() / 1000;
+	System.out.println("Start: " + startTime);
+	System.out.println("Current: " + currentTime);
+	System.out.println("Difference: " + (currentTime - startTime));
+	if ((currentTime - startTime) >= cooldownTime) {
+	    return false;
+	}
+	return true;
     }
 }

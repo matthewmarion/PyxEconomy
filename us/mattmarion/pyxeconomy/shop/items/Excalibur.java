@@ -1,11 +1,9 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -19,16 +17,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class AxeOfPerun implements IShopItem, Listener {
-    
-    private final String name = ChatColor.DARK_PURPLE + "Axe of Perun"; 
+public class Excalibur implements IShopItem, Listener {
+
+    private final String name = ChatColor.DARK_GREEN + "Excalibur"; 
     private final double price = 75;
     private final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Strikes your enemy with lightning upon hitting them.";
+    private final String description = ChatColor.GREEN + "TNT explosion on the enemy.";
     private final List<String> lore = new ArrayList<String>();
     private ItemStack item; 
     
-    public AxeOfPerun() {
+    public Excalibur() {
 	createItem();
 	ShopUtils.getItems().put(name, price);
     }
@@ -45,7 +43,7 @@ public class AxeOfPerun implements IShopItem, Listener {
 
     @Override
     public void createItem() {
-	item = new ItemStack(Material.DIAMOND_AXE);
+	item = new ItemStack(Material.DIAMOND_SWORD);
 	ItemMeta meta = item.getItemMeta();
 	meta.setDisplayName(name);
 	lore.add(priceLore);
@@ -59,8 +57,7 @@ public class AxeOfPerun implements IShopItem, Listener {
 	return item;
     }
     
-    public HashMap<UUID, Long> playersOnCooldown = new HashMap<>();
-    private int cooldown = 8;
+    private Set<Player> invinciblePlayers = new HashSet<>();
     @EventHandler
     public void on(EntityDamageByEntityEvent event) {
 	if (!(event.getDamager() instanceof Player)) {
@@ -76,26 +73,14 @@ public class AxeOfPerun implements IShopItem, Listener {
 	if (!usedAxeOfPerun) {
 	    return;
 	}
-	boolean playerIsOnCooldown = ShopUtils.playerIsOnCooldown(player, playersOnCooldown, cooldown);
-	System.out.println(playerIsOnCooldown);
-	System.out.println(playersOnCooldown);
-	if (playerIsOnCooldown) {
-	    player.sendMessage("On cooldown");
-	    return;
-	}
 	Player attackedPlayer = (Player) event.getEntity();
+	invinciblePlayers.add(player);
 	attackedPlayer.getLocation().getWorld().strikeLightningEffect(attackedPlayer.getLocation());
 	if (attackedPlayer.getHealth() <= 6) {
 	    event.setDamage(20);
-	    putPlayerOnCooldown(player, 8);
 	    return;
 	}
 	attackedPlayer.setHealth(attackedPlayer.getHealth() - 6);
-	putPlayerOnCooldown(player, 8);
     }
-    
-    private void putPlayerOnCooldown(Player player, int duration) {
-	long currentTime = System.currentTimeMillis();
-	playersOnCooldown.put(player.getUniqueId(), currentTime);
-    }
+
 }

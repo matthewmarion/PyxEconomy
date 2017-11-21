@@ -34,11 +34,9 @@ public class PlayerKillListener implements Listener {
     }
     
     private void giveCoins(Profile profile) {
-	double balance = profile.getBalance();
 	int killstreak = profile.getKillstreak();
 	checkMultiplier(profile);
 	double multiplier = profile.getMultiplier();
-	System.out.println("Multiplier here is: " + multiplier);
 	if (killstreak % 10 == 0) {
 	    profile.addBalance(4 * multiplier);
 	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + ChatColor.BOLD + 4 * multiplier + " coins");
