@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
@@ -41,9 +42,10 @@ public class ShopListeners implements Listener {
 	if (!event.getInventory().getName().equals(ChatColor.GREEN + "Shop")) {
 	    return;
 	}
-	if (event.getCurrentItem() == null) {
+	if(event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) {
 	    return;
 	}
+	
 	Player player = (Player) event.getWhoClicked();
 	Profile profile = Profile.getByPlayer(player);
 	
@@ -76,7 +78,7 @@ public class ShopListeners implements Listener {
     
     @EventHandler
     public void on(PlayerDeathEvent event) {
-	playerPurchases.remove(event.getEntity().getUniqueId());
+	playerPurchases.put(event.getEntity().getUniqueId(), 0);
     }
 
     public void addPlayerPurchase(UUID uuid) {
