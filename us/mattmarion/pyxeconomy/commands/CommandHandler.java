@@ -15,6 +15,7 @@ import us.mattmarion.pyxeconomy.commands.balance.RemoveBalanceCommand;
 import us.mattmarion.pyxeconomy.commands.balance.ResetBalanceCommand;
 import us.mattmarion.pyxeconomy.commands.shop.AddItemCommand;
 import us.mattmarion.pyxeconomy.commands.shop.CreateShopCommand;
+import us.mattmarion.pyxeconomy.commands.shop.RandomItemCommand;
 import us.mattmarion.pyxeconomy.utils.MessageUtils;
 
 public class CommandHandler implements CommandExecutor {
@@ -28,6 +29,7 @@ public class CommandHandler implements CommandExecutor {
 	commands.put("balance", new BalanceCommand());
 	commands.put("shop", new CreateShopCommand());
 	commands.put("add", new AddItemCommand());
+	commands.put("random", new RandomItemCommand());
     }
 
     @Override

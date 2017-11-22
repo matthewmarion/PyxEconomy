@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -79,6 +80,19 @@ public class ShopListeners implements Listener {
     @EventHandler
     public void on(PlayerDeathEvent event) {
 	playerPurchases.put(event.getEntity().getUniqueId(), 0);
+    }
+    
+    @EventHandler
+    public void on(EntityDamageEvent event) {
+	if (!(event.getEntity() instanceof Villager))  {
+	    return;
+	}
+	
+	Villager npc = (Villager) event.getEntity();
+	if (npc.getCustomName() == null) {
+	    return;
+	}
+	event.setCancelled(true);
     }
 
     public void addPlayerPurchase(UUID uuid) {

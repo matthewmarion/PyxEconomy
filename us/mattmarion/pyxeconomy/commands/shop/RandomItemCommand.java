@@ -1,6 +1,9 @@
 package us.mattmarion.pyxeconomy.commands.shop;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,15 +17,15 @@ import us.mattmarion.pyxeconomy.shop.ShopInventory;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 import us.mattmarion.pyxeconomy.utils.MessageUtils;
 
-public class AddItemCommand extends PyxCommandExecutor {
-    public AddItemCommand() {
-	setSubCommand("add");
-	setPermission("pyxcoin.shop.add");
-	setUsage("/pyxcoin add <player> item <item>");
+public class RandomItemCommand extends PyxCommandExecutor {
+    public RandomItemCommand() {
+	setSubCommand("random");
+	setPermission("pyxcoin.shop.random");
+	setUsage("/pyxcoin random <player>");
 	setBoth();
-	setLength(4);
+	setLength(2);
     }
-
+    
     private final String itemNotFound = ChatColor.RED + "This item could not be found!";
     
     @Override
@@ -33,17 +36,10 @@ public class AddItemCommand extends PyxCommandExecutor {
 	    sender.sendMessage(MessageUtils.playerNotFoundMessage(args[1]));
 	    return;
 	}
-	
-	if (!args[2].equalsIgnoreCase("item")) {
-	    sender.sendMessage(ChatColor.RED + getUsage());
-	    return;
-	}
 	ShopInventory shopInv = new ShopInventory(target);
-	String itemName = args[3];
-	ItemStack item = ShopUtils.getItemFromName(itemName);
+	ItemStack item = getRandomItem();
 	if (item == null) {
 	    sender.sendMessage(ChatColor.RED + itemNotFound);
-	    sender.sendMessage(ChatColor.RED + listItems());
 	    return;
 	}
 	
@@ -60,16 +56,26 @@ public class AddItemCommand extends PyxCommandExecutor {
 	
 	player.getInventory().addItem(item);
 	player.sendMessage(ChatColor.GREEN + "You were given a " + ChatColor.BOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + ".");
-	sender.sendMessage(ChatColor.GREEN + "Gave " + player.getName() + " a " + item.getItemMeta().getDisplayName());
+	sender.sendMessage(ChatColor.GREEN + "Gave "  + player.getName() + " a " + item.getItemMeta().getDisplayName());
     }
     
-    private String listItems() {
-	String itemList = ChatColor.YELLOW + "Available items: " + ChatColor.GRAY;
+    private List<String> getNameList() {
+	List<String> names = new ArrayList<>();
 	HashMap<String, IShopItem> items = ShopUtils.getItems();
 	for (String name : items.keySet()) {
-	    itemList += name +", ";
+	    names.add(name);
 	}
-	return itemList;
+	return names;
     }
-
+    
+    private ItemStack getRandomItem() {
+	List<String> itemNames = getNameList();
+	System.out.println(itemNames);
+	Random rand = new Random();
+	int random = rand.nextInt(itemNames.size());
+	System.out.println("generated number " + random);
+	String itemName = itemNames.get(random);
+	ItemStack item = ShopUtils.getItemFromName(itemName);
+	return item;
+    }
 }
