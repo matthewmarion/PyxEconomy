@@ -53,8 +53,8 @@ public class RandomItemCommand extends PyxCommandExecutor {
 	    sender.sendMessage(ChatColor.GREEN + "Gave " + player.getName() + " a " + item.getItemMeta().getDisplayName());
 	    return;
 	}
-	
-	player.getInventory().addItem(item);
+	int firstEmpty = player.getInventory().firstEmpty();
+	player.getInventory().setItem(firstEmpty, item);
 	player.sendMessage(ChatColor.GREEN + "You were given a " + ChatColor.BOLD + item.getItemMeta().getDisplayName() + ChatColor.GREEN + ".");
 	sender.sendMessage(ChatColor.GREEN + "Gave "  + player.getName() + " a " + item.getItemMeta().getDisplayName());
     }
@@ -70,10 +70,8 @@ public class RandomItemCommand extends PyxCommandExecutor {
     
     private ItemStack getRandomItem() {
 	List<String> itemNames = getNameList();
-	System.out.println(itemNames);
 	Random rand = new Random();
 	int random = rand.nextInt(itemNames.size());
-	System.out.println("generated number " + random);
 	String itemName = itemNames.get(random);
 	ItemStack item = ShopUtils.getItemFromName(itemName);
 	return item;

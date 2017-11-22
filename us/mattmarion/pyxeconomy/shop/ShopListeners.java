@@ -58,6 +58,10 @@ public class ShopListeners implements Listener {
 
 	ItemStack item = event.getCurrentItem();
 	double price = ShopUtils.getItemPriceFromName(item.getItemMeta().getDisplayName());
+	//Price only should be 0 when its a daredevils egg.
+	if (price == 0) {
+	    price = 150;
+	}
 	if (price > profile.getBalance()) {
 	    player.closeInventory();
 	    player.sendMessage(ChatColor.RED + "Insufficient funds");

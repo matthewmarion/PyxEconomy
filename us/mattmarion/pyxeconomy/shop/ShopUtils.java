@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 
 public class ShopUtils {
@@ -17,6 +18,8 @@ public class ShopUtils {
 	if (item == null) return false;
 	
 	if (!item.hasItemMeta()) return false;
+	ItemMeta meta = item.getItemMeta();
+	if (meta.getDisplayName() == null) return false;
 	  
 	if (!item.getItemMeta().getDisplayName().equals(name)) return false;
 	    

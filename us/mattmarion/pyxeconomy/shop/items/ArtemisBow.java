@@ -7,13 +7,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
+import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
@@ -57,8 +61,23 @@ public class ArtemisBow implements IShopItem, Listener {
 	return item;
     }
     
-    private void shootHomingArrow(Player player) {
-	player.sendMessage("shooting homing arrow");
+    private void shootHomingArrow(EntityShootBowEvent event) {
+	LivingEntity player = event.getEntity();
+	double minAngle = 6.283185307179586D;
+	Entity minEntity = null;
+	for (Entity entity : player.getNearbyEntities(64.0D, 64.0D, 64.0D)) {
+	    if ((player.hasLineOfSight(entity)) && ((entity instanceof LivingEntity)) && (!entity.isDead())) {
+		Vector toTarget = entity.getLocation().toVector().clone().subtract(player.getLocation().toVector());
+		double angle = event.getProjectile().getVelocity().angle(toTarget);
+		if (angle < minAngle) {
+		    minAngle = angle;
+		    minEntity = entity;
+		}
+	    }
+	}
+	if (minEntity != null) {
+	    new HomingTask((Arrow) event.getProjectile(), (LivingEntity) minEntity, PyxEconomy.getInstance());
+	}
     }
     
     @EventHandler
@@ -66,7 +85,6 @@ public class ArtemisBow implements IShopItem, Listener {
 	if (!(event.getEntity() instanceof Player)) {
 	    return;
 	}
-	Player player = (Player) event.getEntity();
 	
 	if (!(event.getProjectile() instanceof Arrow)) {
 	    return;
@@ -80,7 +98,6 @@ public class ArtemisBow implements IShopItem, Listener {
 	if (!willShootHomingArrow) {
 	    return;
 	}
-	
-	shootHomingArrow(player);
+	shootHomingArrow(event);
     }
 }

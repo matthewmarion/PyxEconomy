@@ -11,6 +11,7 @@ import us.mattmarion.pyxeconomy.shop.items.AxeOfPerun;
 import us.mattmarion.pyxeconomy.shop.items.Cornucopia;
 import us.mattmarion.pyxeconomy.shop.items.DeathsScythe;
 import us.mattmarion.pyxeconomy.shop.items.DeusExMachina;
+import us.mattmarion.pyxeconomy.shop.items.Dice;
 import us.mattmarion.pyxeconomy.shop.items.Excalibur;
 import us.mattmarion.pyxeconomy.shop.items.ExodusHelmet;
 import us.mattmarion.pyxeconomy.shop.items.FlaskOfIchor;
@@ -56,6 +57,8 @@ public class ShopInventory {
 	inv.setItem(12, pd.getItem());
 	FlaskOfIchor fi = new FlaskOfIchor();
 	inv.setItem(13, fi.getItem());
+	Dice dice = new Dice();
+	inv.setItem(14, dice.getItem());
     }
     
     public static Inventory getInventory() {

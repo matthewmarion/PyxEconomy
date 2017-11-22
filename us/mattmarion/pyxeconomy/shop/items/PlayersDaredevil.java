@@ -6,25 +6,22 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Egg;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
-import org.bukkit.entity.Horse.Variant;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.ZombieHorse;
+import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MonsterEggs;
-import org.bukkit.material.SpawnEgg;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.spigotmc.event.entity.EntityMountEvent;
-import org.bukkit.inventory.ItemStack;
 
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
@@ -75,12 +72,10 @@ public class PlayersDaredevil implements Listener, IShopItem {
 	
 	Player player = event.getPlayer();
 	if (player.getItemInHand() == null) {
-	    System.out.println("Not egg");
 	    return;
 	}
 	ItemStack itemInHand = player.getItemInHand();
 	boolean usedDaredevilEgg = ShopUtils.itemHasName(ChatColor.DARK_PURPLE + player.getName() + "'s " + name, itemInHand);
-	System.out.println(usedDaredevilEgg);
 	if (!usedDaredevilEgg) {
 	    return;
 	}
@@ -95,28 +90,36 @@ public class PlayersDaredevil implements Listener, IShopItem {
 	}
 	Player player = (Player) event.getEntity();
 	
-	if (!(event.getMount() instanceof ZombieHorse)) {
+	if (!(event.getMount() instanceof SkeletonHorse)) {
 	    return;
 	}
 	Entity horse = event.getMount();
 	
 	if (!daredevils.containsKey(player.getUniqueId())) {
+	    player.sendMessage(ChatColor.RED + "You cannot mount someone elses daredevil.");
+	    event.setCancelled(true);
 	    return;
 	}
 	
 	if (daredevils.get(player.getUniqueId()) != horse) {
 	    player.sendMessage(ChatColor.RED + "You cannot mount someone elses daredevil.");
+	    event.setCancelled(true);
 	}
     }
     
     private void createDaredevil(Player player, Block block) {
-	Horse horse = (Horse) player.getWorld().spawnEntity(block.getLocation(), EntityType.HORSE);
-	//horse.setVariant(Variant.UNDEAD_HORSE);
+	Location location = block.getLocation();
+	location.setY(location.getY() + 1);
+	SkeletonHorse horse = (SkeletonHorse) player.getWorld().spawnEntity(location, EntityType.SKELETON_HORSE);
+	horse.getInventory().setItem(0, new ItemStack(Material.SADDLE));
 	horse.setTamed(true);
-	horse.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-	horse.setJumpStrength(0);
-	horse.setMaxHealth(500);
-	horse.setHealth(500);
+	horse.setJumpStrength(3);
+	horse.setMaxHealth(40);
+	horse.setHealth(40);
+	horse.setAdult();
+	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 75));
+	horse.setCustomName(ChatColor.DARK_PURPLE + player.getName() + "'s " + name);
+	horse.setAI(false);
 	daredevils.put(player.getUniqueId(), horse);
     }
 
