@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -43,10 +44,14 @@ public class ShopListeners implements Listener {
 	if (!event.getInventory().getName().equals(ChatColor.GREEN + "Shop")) {
 	    return;
 	}
+	if (event.getRawSlot() >= event.getInventory().getSize()) {
+	    event.setCancelled(true);
+	    return;
+	}
 	if(event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) {
 	    return;
 	}
-	
+
 	Player player = (Player) event.getWhoClicked();
 	Profile profile = Profile.getByPlayer(player);
 	

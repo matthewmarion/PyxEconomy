@@ -70,13 +70,18 @@ public class ExodusHelmet implements IShopItem, Listener {
 	if (!(arrow.getShooter() instanceof Player)) {
 	    return;
 	}
+	
+	if (event.getEntity() == arrow.getShooter()) {
+	    return;
+	}
+	
 	Player player = (Player) arrow.getShooter();
 	boolean hasExodusHelmetOn = ShopUtils.itemHasName(name, player.getInventory().getHelmet());
 	if (!hasExodusHelmetOn) {
 	    return;
 	}
-	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, 1));
-	
+	PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 40, 1 - 1);
+	player.addPotionEffect(effect);
     }
 
 }

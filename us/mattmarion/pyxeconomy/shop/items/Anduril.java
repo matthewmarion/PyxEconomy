@@ -90,7 +90,7 @@ public class Anduril implements IShopItem, Listener {
     }
     
     private void giveEffects(Player player, int duration) {
-	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, 1), true);
-	player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 1), true);
+	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, 0), true);
+	player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0), true);
     }
 }
