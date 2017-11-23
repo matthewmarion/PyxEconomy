@@ -80,7 +80,7 @@ public class ExodusHelmet implements IShopItem, Listener {
 	if (!hasExodusHelmetOn) {
 	    return;
 	}
-	PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 40, 1 - 1);
+	PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 40, 0);
 	player.addPotionEffect(effect);
     }
 
