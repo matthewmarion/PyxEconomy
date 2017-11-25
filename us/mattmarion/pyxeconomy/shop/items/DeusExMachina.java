@@ -21,13 +21,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class DeusExMachina extends BaseShopItem implements Listener {
     
-    private final String name = ChatColor.LIGHT_PURPLE + "Deus Ex Machina";
-    private final String configName = "DEUS";
-    private final double price = 10;
-    private final String priceLore = ChatColor.GOLD + "10" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Gives you Resistance 5 (Invincibility) for 10 seconds.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.LIGHT_PURPLE + "Deus Ex Machina";
+    private static final String configName = "DEUS";
+    private static final double price = 10;
+    private static final String priceLore = ChatColor.GOLD + "10" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Gives you Resistance 5 (Invincibility) for 10 seconds.";
+    private static ItemStack item; 
     
     public DeusExMachina(Inventory inv, int slot) {
 	super(inv, slot);

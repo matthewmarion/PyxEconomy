@@ -16,13 +16,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class HideOfLeviathan extends BaseShopItem implements Listener {
 
-    private final String name = ChatColor.BLUE + "Hide of Leviathan";
-    private final String configName = "HIDES";
-    private final double price = 30;
-    private final String priceLore = ChatColor.GOLD + "30" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Extracted from the mythical Leviathan.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.BLUE + "Hide of Leviathan";
+    private static final String configName = "HIDES";
+    private static final double price = 30;
+    private static final String priceLore = ChatColor.GOLD + "30" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Extracted from the mythical Leviathan.";
+    private static ItemStack item; 
     
     public HideOfLeviathan(Inventory inv, int slot) {
 	super(inv, slot);

@@ -20,13 +20,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class Excalibur extends BaseShopItem implements Listener {
 
-    private final String name = ChatColor.DARK_GREEN + "Excalibur";
-    private final String configName = "EXCALIBUR";
-    private final double price = 75;
-    private final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "TNT explosion on the enemy.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.DARK_GREEN + "Excalibur";
+    private static final String configName = "EXCALIBUR";
+    private static final double price = 75;
+    private static final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "TNT explosion on the enemy.";
+    private static ItemStack item; 
     
     public Excalibur(Inventory inv, int slot) {
 	super(inv, slot);

@@ -15,13 +15,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class TabletsBow extends BaseShopItem {
     
-    private final String name = ChatColor.RED + "Tablet's Bow"; 
-    private final String configName = "TABLETS_BOW";
-    private final double price = 50;
-    private final String priceLore = ChatColor.GOLD + "50" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GRAY + "Tablet's deadly bow.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.RED + "Tablet's Bow"; 
+    private static final String configName = "TABLETS_BOW";
+    private static final double price = 50;
+    private static final String priceLore = ChatColor.GOLD + "50" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GRAY + "Tablet's deadly bow.";
+    private static ItemStack item; 
     
     public TabletsBow(Inventory inv, int slot) {
 	super(inv, slot);

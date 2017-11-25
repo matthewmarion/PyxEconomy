@@ -15,13 +15,12 @@ import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 
 public class FlaskOfIchor extends BaseShopItem implements Listener {
     
-    private final String name = ChatColor.YELLOW + "Flask of Ichor";
-    private final String configName = "ICHOR";
-    private final double price = 10;
-    private final String priceLore = ChatColor.GOLD + "10" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Deadly splash " + ChatColor.RED + "DAMAGE 3 " + ChatColor.GREEN + "potion.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.YELLOW + "Flask of Ichor";
+    private static final String configName = "ICHOR";
+    private static final double price = 10;
+    private static final String priceLore = ChatColor.GOLD + "10" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Deadly splash " + ChatColor.RED + "DAMAGE 3 " + ChatColor.GREEN + "potion.";
+    private static ItemStack item; 
     
     public FlaskOfIchor(Inventory inv, int slot) {
 	super(inv, slot);

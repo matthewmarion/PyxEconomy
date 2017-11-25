@@ -19,13 +19,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class DeathsScythe extends BaseShopItem implements Listener {
     
-    private final String name = ChatColor.DARK_RED + "Death's Sycthe"; 
-    private final String configName = "SCYTHE";
-    private final double price = 50;
-    private final String priceLore = ChatColor.GOLD + "50" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Removes 20% of the enemies current health.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.DARK_RED + "Death's Sycthe"; 
+    private static final String configName = "SCYTHE";
+    private static final double price = 50;
+    private static final String priceLore = ChatColor.GOLD + "50" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Removes 20% of the enemies current health.";
+    private static ItemStack item; 
     
     public DeathsScythe(Inventory inv, int slot) {
 	super(inv, slot);

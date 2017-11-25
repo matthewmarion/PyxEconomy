@@ -1,6 +1,5 @@
 package us.mattmarion.pyxeconomy.shop.items;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -20,20 +19,17 @@ import org.bukkit.util.Vector;
 
 import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
-import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class ArtemisBow extends BaseShopItem implements Listener {
     
-    private final String name = ChatColor.LIGHT_PURPLE + "Artemis' Bow"; 
-    private final String configName = "ARTEMIS";
-    private final double price = 75;
-    private final String priceString = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "25% chance of shooting a homing arrow.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item;
+    private static final String name = ChatColor.LIGHT_PURPLE + "Artemis' Bow"; 
+    private static final String configName = "ARTEMIS";
+    private static final double price = 75;
+    private static final String priceString = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "25% chance of shooting a homing arrow.";
+    private static ItemStack item;
     
-
     public ArtemisBow(Inventory inv, int slot) {
 	super(inv, slot);
     }
@@ -42,6 +38,7 @@ public class ArtemisBow extends BaseShopItem implements Listener {
 	
     }
     
+    @Override
     public String getName() {
 	return name;
     }
@@ -50,11 +47,13 @@ public class ArtemisBow extends BaseShopItem implements Listener {
     public String getConfigName() {
 	return configName;
     }
-
+    
+    @Override
     public double getPrice() {
 	return price;
     }
     
+    @Override
     public void createItem() {
 	item = new ItemStack(Material.BOW);
 	item.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
@@ -65,7 +64,8 @@ public class ArtemisBow extends BaseShopItem implements Listener {
 	meta.setLore(lore);
 	item.setItemMeta(meta);
     }
-
+    
+    @Override
     public ItemStack getItem() {
 	return item;
     }

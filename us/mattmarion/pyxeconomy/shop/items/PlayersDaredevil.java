@@ -31,13 +31,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class PlayersDaredevil extends BaseShopItem implements Listener {
 
-    private final String name = ChatColor.DARK_PURPLE + "Daredevil";
-    private final String configName = "DARE";
-    private final double price = 150;
-    private final String priceLore = ChatColor.GOLD + "150" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Personal deadly steed.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.DARK_PURPLE + "Daredevil";
+    private static final String configName = "DARE";
+    private static final double price = 150;
+    private static final String priceLore = ChatColor.GOLD + "150" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Personal deadly steed.";
+    private static ItemStack item; 
     
     public PlayersDaredevil(Inventory inv, int slot) {
 	super(inv, slot);
@@ -47,14 +46,17 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	
     }
    
+    @Override
     public String getName() {
 	return name;
     }
     
+    @Override
     public String getConfigName() {
 	return configName;
     }
 
+    @Override
     public double getPrice() {
 	return price;
     }

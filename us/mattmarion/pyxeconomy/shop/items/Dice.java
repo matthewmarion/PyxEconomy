@@ -19,13 +19,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class Dice extends BaseShopItem implements Listener {
     
-    private final String name = ChatColor.RED + "Dice"; 
-    private final String configName = "DICE";
-    private final double price = 35;
-    private final String priceLore = ChatColor.GOLD + "35" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Roll the dice! Random item.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.RED + "Dice"; 
+    private static final String configName = "DICE";
+    private static final double price = 35;
+    private static final String priceLore = ChatColor.GOLD + "35" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Roll the dice! Random item.";
+    private static ItemStack item; 
     
     public Dice(Inventory inv, int slot) {
 	super(inv, slot);

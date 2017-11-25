@@ -16,13 +16,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class KingsRod extends BaseShopItem {
     
-    private final String name = ChatColor.GREEN + "King's Rod"; 
-    private final String configName = "KINGSROD";
-    private final double price = 25;
-    private final String priceLore = ChatColor.GOLD + "25" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Your majesty's rod.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.GREEN + "King's Rod"; 
+    private static final String configName = "KINGSROD";
+    private static final double price = 25;
+    private static final String priceLore = ChatColor.GOLD + "25" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Your majesty's rod.";
+    private static ItemStack item; 
     
     public KingsRod(Inventory inv, int slot) {
 	super(inv, slot);

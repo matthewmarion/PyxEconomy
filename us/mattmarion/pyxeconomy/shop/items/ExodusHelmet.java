@@ -23,13 +23,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class ExodusHelmet extends BaseShopItem implements Listener {
     
-    private final String name = ChatColor.AQUA + "Exodus Helmet";
-    private final String configName = "EXODUS";
-    private final double price = 100;
-    private final String priceLore = ChatColor.GOLD + "100" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Regeneration when you land a bow shot!";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item;
+    private static final String name = ChatColor.AQUA + "Exodus Helmet";
+    private static final String configName = "EXODUS";
+    private static final double price = 100;
+    private static final String priceLore = ChatColor.GOLD + "100" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Regeneration when you land a bow shot!";
+    private static ItemStack item;
 
     public ExodusHelmet(Inventory inv, int slot) {
 	super(inv, slot);
@@ -54,6 +53,7 @@ public class ExodusHelmet extends BaseShopItem implements Listener {
 	return price;
     }
     
+    @Override
     public void createItem() {
 	item = new ItemStack(Material.DIAMOND_HELMET);
 	item.addEnchantment(Enchantment.DURABILITY, 1);

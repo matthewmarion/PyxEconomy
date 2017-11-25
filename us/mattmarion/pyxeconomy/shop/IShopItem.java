@@ -1,5 +1,7 @@
 package us.mattmarion.pyxeconomy.shop;
 
+import java.util.List;
+
 import org.bukkit.inventory.ItemStack;
 
 public interface IShopItem {

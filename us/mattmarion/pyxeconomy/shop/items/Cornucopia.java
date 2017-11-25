@@ -21,13 +21,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class Cornucopia extends BaseShopItem implements Listener {
 
-    private final String name = ChatColor.GOLD + "Cornucopia"; 
-    private final String configName = "CORN";
-    private final double price = 20;
-    private final String priceLore = ChatColor.GOLD + "20" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "7 seconds of Regeneration 1 and 10 minutes of Saturation.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.GOLD + "Cornucopia"; 
+    private static final String configName = "CORN";
+    private static final double price = 20;
+    private static final String priceLore = ChatColor.GOLD + "20" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "7 seconds of Regeneration 1 and 10 minutes of Saturation.";
+    private static ItemStack item; 
     
     public Cornucopia(Inventory inv, int slot) {
 	super(inv, slot);

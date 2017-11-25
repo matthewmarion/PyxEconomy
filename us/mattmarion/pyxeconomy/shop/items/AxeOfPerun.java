@@ -21,13 +21,12 @@ import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class AxeOfPerun extends BaseShopItem implements Listener {
     
-    private final String name = ChatColor.DARK_PURPLE + "Axe of Perun";
-    private final String configName = "PERUN";
-    private final double price = 75;
-    private final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Strikes your enemy with lightning upon hitting them.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.DARK_PURPLE + "Axe of Perun";
+    private static final String configName = "PERUN";
+    private static final double price = 75;
+    private static final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Strikes your enemy with lightning upon hitting them.";
+    private static ItemStack item; 
     
     public AxeOfPerun(Inventory inv, int slot) {
 	super(inv, slot);

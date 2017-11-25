@@ -1,8 +1,5 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -17,18 +14,16 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
-import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class Anduril extends BaseShopItem implements Listener {
 
-    private final String name = ChatColor.DARK_AQUA + "Anduril"; 
-    private final String configName = "ANDURIL";
-    private final double price = 50;
-    private final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
-    private final String description = ChatColor.GREEN + "Gives you Speed 1 and Resistance 1, while you hold it.";
-    private final List<String> lore = new ArrayList<String>();
-    private ItemStack item; 
+    private static final String name = ChatColor.DARK_AQUA + "Anduril"; 
+    private static final String configName = "ANDURIL";
+    private static final double price = 50;
+    private static final String priceLore = ChatColor.GOLD + "75" + ChatColor.GREEN + " coins";
+    private static final String description = ChatColor.GREEN + "Gives you Speed 1 and Resistance 1, while you hold it.";
+    private static ItemStack item; 
     
     public Anduril(Inventory inv, int slot) {
 	super(inv, slot);
