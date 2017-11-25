@@ -17,10 +17,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class ExodusHelmet implements IShopItem, Listener {
+public class ExodusHelmet extends BaseShopItem implements Listener {
     
     private final String name = ChatColor.AQUA + "Exodus Helmet";
     private final String configName = "EXODUS";
@@ -31,15 +32,21 @@ public class ExodusHelmet implements IShopItem, Listener {
     private ItemStack item;
 
     public ExodusHelmet(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public ExodusHelmet() {
+	
     }
     
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

@@ -19,10 +19,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import us.mattmarion.pyxeconomy.PyxEconomy;
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class ArtemisBow implements IShopItem, Listener {
+public class ArtemisBow extends BaseShopItem implements Listener {
     
     private final String name = ChatColor.LIGHT_PURPLE + "Artemis' Bow"; 
     private final String configName = "ARTEMIS";
@@ -34,14 +35,20 @@ public class ArtemisBow implements IShopItem, Listener {
     
 
     public ArtemisBow(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public ArtemisBow() {
+	
     }
     
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     public double getPrice() {

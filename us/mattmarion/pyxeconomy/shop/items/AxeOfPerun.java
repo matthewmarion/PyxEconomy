@@ -2,9 +2,7 @@ package us.mattmarion.pyxeconomy.shop.items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -17,10 +15,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class AxeOfPerun implements IShopItem, Listener {
+public class AxeOfPerun extends BaseShopItem implements Listener {
     
     private final String name = ChatColor.DARK_PURPLE + "Axe of Perun";
     private final String configName = "PERUN";
@@ -31,15 +30,21 @@ public class AxeOfPerun implements IShopItem, Listener {
     private ItemStack item; 
     
     public AxeOfPerun(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public AxeOfPerun() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

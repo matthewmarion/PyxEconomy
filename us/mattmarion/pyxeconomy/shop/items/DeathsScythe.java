@@ -13,10 +13,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class DeathsScythe implements IShopItem, Listener {
+public class DeathsScythe extends BaseShopItem implements Listener {
     
     private final String name = ChatColor.DARK_RED + "Death's Sycthe"; 
     private final String configName = "SCYTHE";
@@ -27,15 +28,21 @@ public class DeathsScythe implements IShopItem, Listener {
     private ItemStack item; 
     
     public DeathsScythe(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public DeathsScythe() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

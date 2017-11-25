@@ -10,10 +10,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class TabletsSword implements IShopItem {
+public class TabletsSword extends BaseShopItem {
     
     private final String name = ChatColor.RED + "Tablet's Sword"; 
     private final String configName = "TABLETS_SWORD";
@@ -24,15 +25,21 @@ public class TabletsSword implements IShopItem {
     private ItemStack item; 
     
     public TabletsSword(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public TabletsSword() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

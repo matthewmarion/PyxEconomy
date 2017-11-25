@@ -32,14 +32,20 @@ public class Anduril extends BaseShopItem implements Listener {
     
     public Anduril(Inventory inv, int slot) {
 	super(inv, slot);
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
+    }
+    
+    public Anduril() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

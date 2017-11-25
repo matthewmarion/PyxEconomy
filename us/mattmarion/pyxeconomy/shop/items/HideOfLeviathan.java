@@ -6,14 +6,15 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import us.mattmarion.pyxeconomy.shop.IShopItem;
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class HideOfLeviathan implements IShopItem {
+public class HideOfLeviathan extends BaseShopItem implements Listener {
 
     private final String name = ChatColor.BLUE + "Hide of Leviathan";
     private final String configName = "HIDES";
@@ -24,15 +25,21 @@ public class HideOfLeviathan implements IShopItem {
     private ItemStack item; 
     
     public HideOfLeviathan(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public HideOfLeviathan() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

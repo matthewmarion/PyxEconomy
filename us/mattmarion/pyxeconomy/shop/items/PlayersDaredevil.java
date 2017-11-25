@@ -25,10 +25,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spigotmc.event.entity.EntityMountEvent;
 
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class PlayersDaredevil implements Listener, IShopItem {
+public class PlayersDaredevil extends BaseShopItem implements Listener {
 
     private final String name = ChatColor.DARK_PURPLE + "Daredevil";
     private final String configName = "DARE";
@@ -38,13 +39,20 @@ public class PlayersDaredevil implements Listener, IShopItem {
     private final List<String> lore = new ArrayList<String>();
     private ItemStack item; 
     
+    public PlayersDaredevil(Inventory inv, int slot) {
+	super(inv, slot);
+    }
+    
     public PlayersDaredevil() {
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
+	
     }
    
     public String getName() {
 	return name;
+    }
+    
+    public String getConfigName() {
+	return configName;
     }
 
     public double getPrice() {

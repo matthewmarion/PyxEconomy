@@ -14,10 +14,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import us.mattmarion.pyxeconomy.shop.IShopItem;
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class Dice implements IShopItem, Listener {
+public class Dice extends BaseShopItem implements Listener {
     
     private final String name = ChatColor.RED + "Dice"; 
     private final String configName = "DICE";
@@ -28,15 +28,21 @@ public class Dice implements IShopItem, Listener {
     private ItemStack item; 
     
     public Dice(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public Dice() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

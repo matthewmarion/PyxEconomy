@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import us.mattmarion.pyxeconomy.commands.CommandHandler;
@@ -39,20 +40,24 @@ public class PyxEconomy extends JavaPlugin {
     }
     
     private void registerEvents() {
-	getServer().getPluginManager().registerEvents(new ProfileListeners(), this);
-	getServer().getPluginManager().registerEvents(new PlayerKillListener(), this);
-	getServer().getPluginManager().registerEvents(new ArtemisBow(), this);
-	getServer().getPluginManager().registerEvents(new AxeOfPerun(), this);
-	getServer().getPluginManager().registerEvents(new Excalibur(), this);
-	getServer().getPluginManager().registerEvents(new Anduril(), this);
-	getServer().getPluginManager().registerEvents(new ExodusHelmet(), this);
-	getServer().getPluginManager().registerEvents(new ShopListeners(),this);
-	getServer().getPluginManager().registerEvents(new Cornucopia(), this);
-	getServer().getPluginManager().registerEvents(new DeusExMachina(), this);
-	getServer().getPluginManager().registerEvents(new DeathsScythe(), this);
-	getServer().getPluginManager().registerEvents(new PlayersDaredevil(), this);
-	getServer().getPluginManager().registerEvents(new FlaskOfIchor(), this);
-	getServer().getPluginManager().registerEvents(new Dice(), this);
+	registerListener(new ProfileListeners());
+	registerListener(new PlayerKillListener());
+	registerListener(new ArtemisBow());
+	registerListener(new AxeOfPerun());
+	registerListener(new Excalibur());
+	registerListener(new Anduril());
+	registerListener(new ExodusHelmet());
+	registerListener(new ShopListeners());
+	registerListener(new Cornucopia());
+	registerListener(new DeusExMachina());
+	registerListener(new DeathsScythe());
+	registerListener(new PlayersDaredevil());
+	registerListener(new FlaskOfIchor());
+	registerListener(new Dice());
+    }
+    
+    private void registerListener(Listener listener) {
+	getServer().getPluginManager().registerEvents(listener, this);
     }
     
     private void registerCommands() {

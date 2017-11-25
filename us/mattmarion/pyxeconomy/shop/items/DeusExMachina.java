@@ -15,10 +15,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class DeusExMachina implements IShopItem, Listener {
+public class DeusExMachina extends BaseShopItem implements Listener {
     
     private final String name = ChatColor.LIGHT_PURPLE + "Deus Ex Machina";
     private final String configName = "DEUS";
@@ -29,15 +30,21 @@ public class DeusExMachina implements IShopItem, Listener {
     private ItemStack item; 
     
     public DeusExMachina(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public DeusExMachina() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

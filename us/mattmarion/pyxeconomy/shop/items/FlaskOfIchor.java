@@ -1,28 +1,19 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
-import us.mattmarion.pyxeconomy.shop.IShopItem;
-import us.mattmarion.pyxeconomy.shop.ShopUtils;
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 
-public class FlaskOfIchor implements IShopItem, Listener {
+public class FlaskOfIchor extends BaseShopItem implements Listener {
     
     private final String name = ChatColor.YELLOW + "Flask of Ichor";
     private final String configName = "ICHOR";
@@ -33,15 +24,21 @@ public class FlaskOfIchor implements IShopItem, Listener {
     private ItemStack item; 
     
     public FlaskOfIchor(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public FlaskOfIchor() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override

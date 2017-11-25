@@ -15,10 +15,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import us.mattmarion.pyxeconomy.shop.IShopItem;
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class Excalibur implements IShopItem, Listener {
+public class Excalibur extends BaseShopItem implements Listener {
 
     private final String name = ChatColor.DARK_GREEN + "Excalibur";
     private final String configName = "EXCALIBUR";
@@ -29,15 +29,21 @@ public class Excalibur implements IShopItem, Listener {
     private ItemStack item; 
     
     public Excalibur(Inventory inv, int slot) {
-	createItem();
-	ShopUtils.getItemPrices().put(name, price);
-	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
+	super(inv, slot);
+    }
+    
+    public Excalibur() {
+	
     }
    
     @Override
     public String getName() {
 	return name;
+    }
+    
+    @Override
+    public String getConfigName() {
+	return configName;
     }
 
     @Override
