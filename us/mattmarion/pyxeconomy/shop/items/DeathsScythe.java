@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import net.minecraft.server.v1_8_R3.EntityLiving;
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
@@ -84,6 +86,13 @@ public class DeathsScythe extends BaseShopItem implements Listener {
 	}
 	
 	Player attackedPlayer = (Player) event.getEntity();
+	EntityLiving el = ((CraftPlayer)attackedPlayer).getHandle();
+	if (el.getAbsorptionHearts() > 0) {
+	    float absorptionHearts = el.getAbsorptionHearts();
+	    el.setAbsorptionHearts((float) (absorptionHearts - absorptionHearts * .20));
+	    incrementUsage(player);
+	    return;
+	}
 	double health = attackedPlayer.getHealth();
 	if (health - health *.20 < 0) {
 	    event.setDamage(5000);
@@ -97,10 +106,11 @@ public class DeathsScythe extends BaseShopItem implements Listener {
 	    scytheUses.put(player.getUniqueId(), 1);
 	} else {
 	    int uses = scytheUses.get(player.getUniqueId());
+	    System.out.println(uses);
 	    if (uses >= 30) {
 		breakScythe(player);
 	    }
-	    scytheUses.put(player.getUniqueId(), uses++);
+	    scytheUses.put(player.getUniqueId(), uses + 1);
 	}
     }
     
@@ -110,7 +120,7 @@ public class DeathsScythe extends BaseShopItem implements Listener {
 	}
 	ItemStack scythe = player.getInventory().getItemInHand();
 	player.getInventory().remove(scythe);
-	player.getLocation().getWorld().playEffect(player.getLocation(), Effect.ITEM_BREAK, 1);
+	player.getLocation().getWorld().playEffect(player.getLocation(), Effect.ITEM_BREAK, 0);
 	player.sendMessage(ChatColor.RED + "You have used your " + scythe.getItemMeta().getDisplayName() + "'s use limit and it has broken!");
     }
 }
