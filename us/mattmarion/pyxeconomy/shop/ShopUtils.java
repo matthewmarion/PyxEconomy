@@ -83,4 +83,12 @@ public class ShopUtils {
 	compound.setByte("NoAI", (byte) 1);
 	nmsEn.f(compound);
     }
+
+    public static void unfreezeEntity(Entity en) {
+	net.minecraft.server.v1_8_R3.Entity nmsEn = ((CraftEntity) en).getHandle();
+	NBTTagCompound compound = new NBTTagCompound();
+	nmsEn.c(compound);
+	compound.remove("NoAI");
+	nmsEn.f(compound);
+    }
 }

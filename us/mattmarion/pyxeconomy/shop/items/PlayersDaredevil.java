@@ -23,6 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
@@ -117,6 +118,21 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	    player.sendMessage(ChatColor.RED + "You cannot mount someone elses daredevil.");
 	    event.setCancelled(true);
 	}
+	ShopUtils.unfreezeEntity(horse);
+    }
+    
+    @EventHandler
+    public void on(EntityDismountEvent event) {
+	if (!(event.getEntity() instanceof Player)) {
+	    return;
+	}
+	Player player = (Player) event.getEntity();
+	
+	if (!(event.getDismounted() instanceof Horse)) {
+	    return;
+	}
+	Entity horse = event.getDismounted();
+	ShopUtils.freezeEntity(horse);
     }
     
     private void createDaredevil(Player player, Block block) {
