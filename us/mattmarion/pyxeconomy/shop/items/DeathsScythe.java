@@ -1,9 +1,11 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
-import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class DeathsScythe extends BaseShopItem implements Listener {
@@ -65,6 +66,7 @@ public class DeathsScythe extends BaseShopItem implements Listener {
 	return item;
     }
     
+    private HashMap<UUID, Integer> scytheUses = new HashMap<UUID, Integer>();
     @EventHandler
     public void on(EntityDamageByEntityEvent event) {
 	if (!(event.getDamager() instanceof Player)) {
@@ -87,5 +89,28 @@ public class DeathsScythe extends BaseShopItem implements Listener {
 	    event.setDamage(5000);
 	}
 	attackedPlayer.setHealth(health - health * .20);
+	incrementUsage(player);
+    }
+    
+    private void incrementUsage(Player player) {
+	if (scytheUses.get(player.getUniqueId()) == null) {
+	    scytheUses.put(player.getUniqueId(), 1);
+	} else {
+	    int uses = scytheUses.get(player.getUniqueId());
+	    if (uses >= 30) {
+		breakScythe(player);
+	    }
+	    scytheUses.put(player.getUniqueId(), uses++);
+	}
+    }
+    
+    private void breakScythe(Player player) {
+	if (player.getInventory().getItemInHand() == null) {
+	    return;
+	}
+	ItemStack scythe = player.getInventory().getItemInHand();
+	player.getInventory().remove(scythe);
+	player.getLocation().getWorld().playEffect(player.getLocation(), Effect.ITEM_BREAK, 1);
+	player.sendMessage(ChatColor.RED + "You have used your " + scythe.getItemMeta().getDisplayName() + "'s use limit and it has broken!");
     }
 }
