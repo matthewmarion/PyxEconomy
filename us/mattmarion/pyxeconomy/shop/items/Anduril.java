@@ -16,10 +16,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
-public class Anduril implements IShopItem, Listener {
+public class Anduril extends BaseShopItem implements Listener {
 
     private final String name = ChatColor.DARK_AQUA + "Anduril"; 
     private final String configName = "ANDURIL";
@@ -30,10 +31,10 @@ public class Anduril implements IShopItem, Listener {
     private ItemStack item; 
     
     public Anduril(Inventory inv, int slot) {
+	super(inv, slot);
 	createItem();
 	ShopUtils.getItemPrices().put(name, price);
 	ShopUtils.getItems().put(configName, this);
-	inv.setItem(slot, getItem());
     }
    
     @Override
