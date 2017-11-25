@@ -1,9 +1,7 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -11,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -27,10 +26,11 @@ public class DeathsScythe implements IShopItem, Listener {
     private final List<String> lore = new ArrayList<String>();
     private ItemStack item; 
     
-    public DeathsScythe() {
+    public DeathsScythe(Inventory inv, int slot) {
 	createItem();
 	ShopUtils.getItemPrices().put(name, price);
 	ShopUtils.getItems().put(configName, this);
+	inv.setItem(slot, getItem());
     }
    
     @Override

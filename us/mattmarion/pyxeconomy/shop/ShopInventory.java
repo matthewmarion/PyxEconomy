@@ -28,37 +28,23 @@ public class ShopInventory {
     
     public ShopInventory(Player player) {
 	inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Shop");
-	ArtemisBow artemis = new ArtemisBow();
-	inv.setItem(0, artemis.getItem());
-	ExodusHelmet exodus = new ExodusHelmet();
-	inv.setItem(1, exodus.getItem());
-	HideOfLeviathan hod = new HideOfLeviathan();
-	inv.setItem(2, hod.getItem());
-	TabletsSword ts = new TabletsSword();
-	inv.setItem(3, ts.getItem());
-	TabletsBow tb = new TabletsBow();
-	inv.setItem(4, tb.getItem());
-	AxeOfPerun ap = new AxeOfPerun();
-	inv.setItem(5, ap.getItem());
-	Excalibur ex = new Excalibur();
-	inv.setItem(6, ex.getItem());
-	Anduril an = new Anduril();
-	inv.setItem(7, an.getItem());
-	Cornucopia cn = new Cornucopia();
-	inv.setItem(8, cn.getItem());
-	DeusExMachina dex = new DeusExMachina();
-	inv.setItem(9, dex.getItem());
-	KingsRod kd = new KingsRod();
-	inv.setItem(10, kd.getItem());
-	DeathsScythe ds = new DeathsScythe();
-	inv.setItem(11, ds.getItem());
+	new ArtemisBow(inv, 0);
+	new ExodusHelmet(inv, 1);
+	new HideOfLeviathan(inv , 2);
+	new TabletsSword(inv, 3);
+	new TabletsBow(inv, 4);
+	new AxeOfPerun(inv, 5);
+	new Excalibur(inv, 6);
+	new Anduril(inv ,7);
+	new Cornucopia(inv, 8);
+	new DeusExMachina(inv, 9);
+	new KingsRod(inv, 10);
+	new DeathsScythe(inv, 11);
 	PlayersDaredevil pd = new PlayersDaredevil();
 	pd.createNewItem(player);
 	inv.setItem(12, pd.getItem());
-	FlaskOfIchor fi = new FlaskOfIchor();
-	inv.setItem(13, fi.getItem());
-	Dice dice = new Dice();
-	inv.setItem(14, dice.getItem());
+	new FlaskOfIchor(inv, 13);
+	new Dice(inv, 14);
     }
     
     public static Inventory getInventory() {

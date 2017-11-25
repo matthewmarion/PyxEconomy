@@ -9,8 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -27,10 +27,11 @@ public class Dice implements IShopItem, Listener {
     private final List<String> lore = new ArrayList<String>();
     private ItemStack item; 
     
-    public Dice() {
+    public Dice(Inventory inv, int slot) {
 	createItem();
 	ShopUtils.getItemPrices().put(name, price);
 	ShopUtils.getItems().put(configName, this);
+	inv.setItem(slot, getItem());
     }
    
     @Override

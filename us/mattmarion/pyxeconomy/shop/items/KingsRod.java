@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -22,10 +23,11 @@ public class KingsRod implements IShopItem {
     private final List<String> lore = new ArrayList<String>();
     private ItemStack item; 
     
-    public KingsRod() {
+    public KingsRod(Inventory inv, int slot) {
 	createItem();
 	ShopUtils.getItemPrices().put(name, price);
 	ShopUtils.getItems().put(configName, this);
+	inv.setItem(slot, getItem());
     }
    
     @Override

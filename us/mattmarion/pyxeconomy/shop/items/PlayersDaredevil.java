@@ -11,12 +11,14 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Horse;
+import org.bukkit.entity.Horse.Variant;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.SkeletonHorse;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -90,7 +92,7 @@ public class PlayersDaredevil implements Listener, IShopItem {
 	}
 	Player player = (Player) event.getEntity();
 	
-	if (!(event.getMount() instanceof SkeletonHorse)) {
+	if (!(event.getMount() instanceof Horse)) {
 	    return;
 	}
 	Entity horse = event.getMount();
@@ -110,8 +112,9 @@ public class PlayersDaredevil implements Listener, IShopItem {
     private void createDaredevil(Player player, Block block) {
 	Location location = block.getLocation();
 	location.setY(location.getY() + 1);
-	SkeletonHorse horse = (SkeletonHorse) player.getWorld().spawnEntity(location, EntityType.SKELETON_HORSE);
+	Horse horse = (Horse) player.getWorld().spawnEntity(location, EntityType.HORSE);
 	horse.getInventory().setItem(0, new ItemStack(Material.SADDLE));
+	horse.setVariant(Variant.SKELETON_HORSE);
 	horse.setTamed(true);
 	horse.setJumpStrength(3);
 	horse.setMaxHealth(40);
@@ -119,7 +122,7 @@ public class PlayersDaredevil implements Listener, IShopItem {
 	horse.setAdult();
 	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 75));
 	horse.setCustomName(ChatColor.DARK_PURPLE + player.getName() + "'s " + name);
-	horse.setAI(false);
+	ShopUtils.freezeEntity((Horse) horse);
 	daredevils.put(player.getUniqueId(), horse);
     }
 

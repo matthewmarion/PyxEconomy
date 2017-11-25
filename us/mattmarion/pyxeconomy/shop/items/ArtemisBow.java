@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
@@ -32,10 +33,11 @@ public class ArtemisBow implements IShopItem, Listener {
     private ItemStack item;
     
 
-    public ArtemisBow() {
+    public ArtemisBow(Inventory inv, int slot) {
 	createItem();
 	ShopUtils.getItemPrices().put(name, price);
 	ShopUtils.getItems().put(configName, this);
+	inv.setItem(slot, getItem());
     }
     
     public String getName() {

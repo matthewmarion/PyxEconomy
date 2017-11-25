@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager.Profession;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 
 
 public class ShopUtils {
@@ -69,5 +74,13 @@ public class ShopUtils {
 	    return false;
 	}
 	return true;
+    }
+    
+    public static void freezeEntity(Entity en) {
+	net.minecraft.server.v1_8_R3.Entity nmsEn = ((CraftEntity) en).getHandle();
+	NBTTagCompound compound = new NBTTagCompound();
+	nmsEn.c(compound);
+	compound.setByte("NoAI", (byte) 1);
+	nmsEn.f(compound);
     }
 }

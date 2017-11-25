@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -27,10 +28,11 @@ public class DeusExMachina implements IShopItem, Listener {
     private final List<String> lore = new ArrayList<String>();
     private ItemStack item; 
     
-    public DeusExMachina() {
+    public DeusExMachina(Inventory inv, int slot) {
 	createItem();
 	ShopUtils.getItemPrices().put(name, price);
 	ShopUtils.getItems().put(configName, this);
+	inv.setItem(slot, getItem());
     }
    
     @Override

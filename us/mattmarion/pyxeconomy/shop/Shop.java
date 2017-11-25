@@ -1,15 +1,15 @@
 package us.mattmarion.pyxeconomy.shop;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
 
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import us.mattmarion.pyxeconomy.PyxEconomy;
 
 public class Shop {
@@ -63,8 +63,7 @@ public class Shop {
 	Villager npc = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
 	npc.getLocation().setDirection(location.getDirection());
 	npc.setCustomName(ChatColor.GREEN + name + " Shop");
-	npc.setAI(false);
-	npc.setCollidable(false);
 	npc.setProfession(Profession.BLACKSMITH);
+	ShopUtils.freezeEntity((Villager) npc);
     }
 }
