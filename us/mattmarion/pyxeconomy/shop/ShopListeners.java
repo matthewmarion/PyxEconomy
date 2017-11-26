@@ -36,7 +36,6 @@ public class ShopListeners implements Listener {
 	}
 	ShopInventory shopInv = new ShopInventory(event.getPlayer());
 	event.getPlayer().openInventory(shopInv.getInventory());
-	event.getPlayer().updateInventory();
 	event.setCancelled(true);
     }
 

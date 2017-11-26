@@ -152,7 +152,7 @@ public class PyxEconomy extends JavaPlugin {
 	    public String onPlaceholderReplace(PlaceholderReplaceEvent event) {
 		Player player = event.getPlayer();
 		Profile profile = Profile.getByPlayer(player);
-		double coins = profile.getBalance();
+		double coins = Math.round(profile.getBalance());
 		String stringCoins = Double.toString(coins);
 		return stringCoins;
 	    }
