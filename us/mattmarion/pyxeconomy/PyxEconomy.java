@@ -3,14 +3,20 @@ package us.mattmarion.pyxeconomy;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import be.maximvdw.placeholderapi.PlaceholderAPI;
+import be.maximvdw.placeholderapi.PlaceholderReplaceEvent;
+import be.maximvdw.placeholderapi.PlaceholderReplacer;
 import us.mattmarion.pyxeconomy.commands.CommandHandler;
 import us.mattmarion.pyxeconomy.listeners.PlayerKillListener;
+import us.mattmarion.pyxeconomy.profile.Profile;
 import us.mattmarion.pyxeconomy.profile.ProfileListeners;
 import us.mattmarion.pyxeconomy.shop.ShopListeners;
 import us.mattmarion.pyxeconomy.shop.items.Anduril;
@@ -37,6 +43,7 @@ public class PyxEconomy extends JavaPlugin {
 	loadConfig();
 	registerEvents();
 	registerCommands();
+	loadCoinPlaceholder();
     }
     
     private void registerEvents() {
@@ -133,5 +140,22 @@ public class PyxEconomy extends JavaPlugin {
     
     public static PyxEconomy getInstance() {
 	return instance;
+    }
+    
+    private void loadCoinPlaceholder() {
+	if (!Bukkit.getPluginManager().isPluginEnabled("MVdWPlaceholderAPI")) {
+	    return;
+	}
+	System.out.println("MVdW is enabled!");
+	PlaceholderAPI.registerPlaceholder(this, "coins", new PlaceholderReplacer() {
+	    @Override
+	    public String onPlaceholderReplace(PlaceholderReplaceEvent event) {
+		Player player = event.getPlayer();
+		Profile profile = Profile.getByPlayer(player);
+		double coins = profile.getBalance();
+		String stringCoins = Double.toString(coins);
+		return stringCoins;
+	    }
+	});
     }
 }
