@@ -89,7 +89,7 @@ public class ExodusHelmet extends BaseShopItem implements Listener {
 	if (!hasExodusHelmetOn) {
 	    return;
 	}
-	PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 40, 0);
+	PotionEffect effect = new PotionEffect(PotionEffectType.REGENERATION, 60, 0);
 	player.addPotionEffect(effect);
     }
 

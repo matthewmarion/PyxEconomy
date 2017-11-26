@@ -90,12 +90,12 @@ public class AxeOfPerun extends BaseShopItem implements Listener {
 	}
 	Player attackedPlayer = (Player) event.getEntity();
 	attackedPlayer.getLocation().getWorld().strikeLightningEffect(attackedPlayer.getLocation());
-	if (attackedPlayer.getHealth() <= 6) {
+	if (attackedPlayer.getHealth() <= 4) {
 	    event.setDamage(20);
 	    putPlayerOnCooldown(player, 8);
 	    return;
 	}
-	attackedPlayer.setHealth(attackedPlayer.getHealth() - 6);
+	attackedPlayer.setHealth(attackedPlayer.getHealth() - 4);
 	putPlayerOnCooldown(player, 8);
     }
     

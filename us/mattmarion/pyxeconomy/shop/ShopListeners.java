@@ -36,6 +36,7 @@ public class ShopListeners implements Listener {
 	}
 	ShopInventory shopInv = new ShopInventory(event.getPlayer());
 	event.getPlayer().openInventory(shopInv.getInventory());
+	event.getPlayer().updateInventory();
 	event.setCancelled(true);
     }
 
@@ -72,8 +73,8 @@ public class ShopListeners implements Listener {
 	    player.sendMessage(ChatColor.RED + "Insufficient funds");
 	    return;
 	}
-
 	player.getInventory().addItem(item);
+	player.updateInventory();
 	profile.removeBalance(price);
 	addPlayerPurchase(player.getUniqueId());
 	profile.save();

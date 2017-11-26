@@ -24,7 +24,7 @@ import us.mattmarion.pyxeconomy.shop.items.TabletsSword;
 
 public class ShopInventory {
     
-    private static Inventory inv;
+    private Inventory inv;
     
     public ShopInventory(Player player) {
 	inv = Bukkit.createInventory(null, 27, ChatColor.GREEN + "Shop");
@@ -47,7 +47,7 @@ public class ShopInventory {
 	new Dice(inv, 14);
     }
     
-    public static Inventory getInventory() {
+    public Inventory getInventory() {
    	return inv;
     }      
 }
