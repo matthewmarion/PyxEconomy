@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -103,7 +104,7 @@ public class DeathsScythe extends BaseShopItem implements Listener {
     
     private void incrementUsage(Player player) {
 	if (scytheUses.get(player.getUniqueId()) == null) {
-	    scytheUses.put(player.getUniqueId(), 1);
+	    scytheUses.put(player.getUniqueId(), 25);
 	} else {
 	    int uses = scytheUses.get(player.getUniqueId());
 	    System.out.println(uses);
@@ -120,7 +121,7 @@ public class DeathsScythe extends BaseShopItem implements Listener {
 	}
 	ItemStack scythe = player.getInventory().getItemInHand();
 	player.getInventory().remove(scythe);
-	player.getLocation().getWorld().playEffect(player.getLocation(), Effect.ITEM_BREAK, 0);
-	player.sendMessage(ChatColor.RED + "You have used your " + scythe.getItemMeta().getDisplayName() + "'s use limit and it has broken!");
+	player.getWorld().playSound(player.getLocation(), Sound.ITEM_BREAK, 3.0F, .0533F);
+	player.sendMessage(ChatColor.RED + "You have used your " + scythe.getItemMeta().getDisplayName() + ChatColor.RED +  "'s use limit and it has broken!");
     }
 }
