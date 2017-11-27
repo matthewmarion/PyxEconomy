@@ -84,7 +84,7 @@ public class Cornucopia extends BaseShopItem implements Listener {
 	    }
 	    
 	    ItemStack corn = player.getItemInHand();
-	    boolean isCorn = ShopUtils.itemHasName(name, item);
+	    boolean isCorn = ShopUtils.itemHasName(name, corn);
 	    if (!isCorn) {
 		return;
 	    }

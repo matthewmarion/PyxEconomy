@@ -23,9 +23,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
+import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
@@ -94,6 +96,7 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	}
 	Block blockClicked = event.getClickedBlock();
 	createDaredevil(player, blockClicked);
+	useDare(itemInHand, player);
     }
     
     @EventHandler
@@ -116,7 +119,9 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	
 	if (daredevils.get(player.getUniqueId()) != horse) {
 	    player.sendMessage(ChatColor.RED + "You cannot mount someone elses daredevil.");
+	    ShopUtils.freezeEntity(horse);
 	    event.setCancelled(true);
+	    return;
 	}
 	ShopUtils.unfreezeEntity(horse);
     }
@@ -146,7 +151,7 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	horse.setMaxHealth(40);
 	horse.setHealth(40);
 	horse.setAdult();
-	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 75));
+	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 56));
 	horse.setCustomName(ChatColor.DARK_PURPLE + player.getName() + "'s " + name);
 	ShopUtils.freezeEntity((Horse) horse);
 	daredevils.put(player.getUniqueId(), horse);
@@ -155,5 +160,19 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
     @Override
     public void createItem() {
 	// TODO Auto-generated method stub
+    }
+    
+    private void useDare(ItemStack dare, Player player) {
+	int newAmount = dare.getAmount() - 1;
+	if (newAmount == 0) {
+	    new BukkitRunnable() {
+		@Override
+		public void run() {
+		    player.getInventory().remove(dare);
+		}
+	    }.runTask(PyxEconomy.getInstance());
+	    return;
+	}
+	dare.setAmount(newAmount);
     }
 }

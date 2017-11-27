@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -18,7 +19,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.profile.Profile;
 
 public class ShopListeners implements Listener {
@@ -56,8 +59,8 @@ public class ShopListeners implements Listener {
 	Profile profile = Profile.getByPlayer(player);
 	
 	if (!canPlayerPurchase(player)) {
+	    safelyCloseInventory(player, event);
 	    player.sendMessage(ChatColor.RED + "You are out of purchases! You must die in combat or relog to get more.");
-	    player.closeInventory();
 	    return;
 	}
 
@@ -68,17 +71,32 @@ public class ShopListeners implements Listener {
 	    price = 150;
 	}
 	if (price > profile.getBalance()) {
-	    player.closeInventory();
+	    safelyCloseInventory(player, event);
 	    player.sendMessage(ChatColor.RED + "Insufficient funds");
 	    return;
 	}
+	
+	completeTransaction(player, item, profile, price, event);
+	
+    }
+    
+    private void completeTransaction(Player player, ItemStack item, Profile profile, double price, InventoryClickEvent event) {
 	player.getInventory().addItem(item);
-	player.updateInventory();
 	profile.removeBalance(price);
 	addPlayerPurchase(player.getUniqueId());
 	profile.save();
-	player.closeInventory();
+	safelyCloseInventory(player, event);
 	player.sendMessage(ChatColor.GREEN + "You have purchased " + ChatColor.GOLD + "[1] " + ChatColor.GREEN + item.getItemMeta().getDisplayName());
+    }
+    
+    private void safelyCloseInventory(Player player, InventoryClickEvent event) {
+	event.setCancelled(true);
+	new BukkitRunnable() {
+	    @Override
+	    public void run() {
+		player.closeInventory();
+	    }
+	}.runTask(PyxEconomy.getInstance());
     }
     
     @EventHandler

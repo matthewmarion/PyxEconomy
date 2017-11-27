@@ -21,7 +21,6 @@ public class PlayerKillListener implements Listener {
 	killerProfile.setKillstreak(killerProfile.getKillstreak() + 1);
 	killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + deadPlayer.getName() + ". "+ ChatColor.GREEN + "You are now on a " + ChatColor.GOLD + killerProfile.getKillstreak() + " killstreak.");
 	giveCoins(killerProfile);
-	    
 	resetKillstreak(deadPlayer);
 	deadPlayer.sendMessage(ChatColor.RED + "You died to " + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + killer.getName() + ChatColor.RED + " and your killstreak is now " + ChatColor.GOLD + "" + ChatColor.BOLD + 0);
 	killerProfile.save();
@@ -37,6 +36,7 @@ public class PlayerKillListener implements Listener {
 	int killstreak = profile.getKillstreak();
 	checkMultiplier(profile);
 	double multiplier = profile.getMultiplier();
+	System.out.println(multiplier);
 	if (killstreak % 10 == 0) {
 	    profile.addBalance(4 * multiplier);
 	    profile.getPlayer().sendMessage(ChatColor.GREEN + "You earned " + ChatColor.GOLD + ChatColor.BOLD + 4 * multiplier + " coins");
@@ -49,9 +49,11 @@ public class PlayerKillListener implements Listener {
     
     private void checkMultiplier(Profile profile) {
 	Player player = profile.getPlayer();
-	for (double i = 1.0; i < 9.0; i+= .5) {
+	for (double i = 8.5; i > 0; i-= .5) {
+	    System.out.println("Checking mutltiplier for: pyxeco." + i);
 	    if (player.hasPermission("pyxeco." + i)) {
 		profile.setMultiplier(i);
+		break;
 	    } else {
 		profile.setMultiplier(1);
 	    }
