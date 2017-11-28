@@ -27,6 +27,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.spigotmc.event.entity.EntityDismountEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
+import com.sk89q.worldedit.blocks.BlockType;
+
 import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.IShopItem;
@@ -109,7 +111,7 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	if (!(event.getMount() instanceof Horse)) {
 	    return;
 	}
-	Entity horse = event.getMount();
+	Entity entity = event.getMount();
 	
 	if (!daredevils.containsKey(player.getUniqueId())) {
 	    player.sendMessage(ChatColor.RED + "You cannot mount someone elses daredevil.");
@@ -117,13 +119,15 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	    return;
 	}
 	
-	if (daredevils.get(player.getUniqueId()) != horse) {
+	if (daredevils.get(player.getUniqueId()) != entity) {
 	    player.sendMessage(ChatColor.RED + "You cannot mount someone elses daredevil.");
-	    ShopUtils.freezeEntity(horse);
+	    ShopUtils.freezeEntity(entity);
 	    event.setCancelled(true);
 	    return;
 	}
-	ShopUtils.unfreezeEntity(horse);
+	Horse horse = (Horse) entity;
+	ShopUtils.unfreezeEntity(entity);
+	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 23));
     }
     
     @EventHandler
@@ -136,8 +140,16 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	if (!(event.getDismounted() instanceof Horse)) {
 	    return;
 	}
-	Entity horse = event.getDismounted();
-	ShopUtils.freezeEntity(horse);
+	Entity entity = event.getDismounted();
+	
+	if (horseInWater(entity)) {
+	    ShopUtils.unfreezeEntity(entity);
+	    Horse horse = (Horse) entity;
+	    horse.removePotionEffect(PotionEffectType.SPEED);
+	    return;
+	}
+	
+	ShopUtils.freezeEntity(entity);
     }
     
     private void createDaredevil(Player player, Block block) {
@@ -174,5 +186,13 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	    return;
 	}
 	dare.setAmount(newAmount);
+    }
+    
+    private boolean horseInWater(Entity horse) {
+	Material block = horse.getLocation().getBlock().getType();
+	if (block == Material.WATER || (block == Material.STATIONARY_WATER)) {
+	    return true;
+	}
+	return false;
     }
 }
