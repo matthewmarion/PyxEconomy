@@ -1,8 +1,6 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -15,8 +13,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+
+import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
-import us.mattmarion.pyxeconomy.shop.IShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
 public class AxeOfPerun extends BaseShopItem implements Listener {
@@ -84,6 +84,12 @@ public class AxeOfPerun extends BaseShopItem implements Listener {
 	if (!usedAxeOfPerun) {
 	    return;
 	}
+	
+	boolean canPvp = ShopUtils.playerCanPvp(player);
+	if (!canPvp) {
+	    return;
+	}
+	
 	boolean playerIsOnCooldown = ShopUtils.playerIsOnCooldown(player, playersOnCooldown, cooldown);
 	if (playerIsOnCooldown) {
 	    return;

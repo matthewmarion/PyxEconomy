@@ -83,6 +83,12 @@ public class Excalibur extends BaseShopItem implements Listener {
 	if (!usedExcalibur) {
 	    return;
 	}
+	
+	boolean canPvp = ShopUtils.playerCanPvp(player);
+	if (!canPvp) {
+	    return;
+	}
+	
 	boolean playerIsOnCooldown = ShopUtils.playerIsOnCooldown(player, playersOnCooldown, cooldown);
 	if (playerIsOnCooldown) {
 	    return;

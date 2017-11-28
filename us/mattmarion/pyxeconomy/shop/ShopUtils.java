@@ -7,11 +7,17 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Villager.Profession;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import us.mattmarion.pyxeconomy.PyxEconomy;
 
 
 public class ShopUtils {
@@ -90,5 +96,22 @@ public class ShopUtils {
 	nmsEn.c(compound);
 	compound.remove("NoAI");
 	nmsEn.f(compound);
+    }
+    
+    public static boolean playerCanPvp(Player player) {
+	WorldGuardPlugin wg = PyxEconomy.getInstance().getWorldGuard();
+	RegionManager regionManager = wg.getRegionManager(player.getWorld());
+	ApplicableRegionSet regionSet = regionManager.getApplicableRegions(player.getLocation());
+	
+	for (ProtectedRegion region : regionSet) {
+	    if (region == null) {
+		return true;
+	    }
+	    
+	    if (!regionSet.allows(DefaultFlag.PVP)) {
+		return false;
+	    }
+	}
+	return false;
     }
 }

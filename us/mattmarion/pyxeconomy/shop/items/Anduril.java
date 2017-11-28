@@ -12,6 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -89,6 +91,26 @@ public class Anduril extends BaseShopItem implements Listener {
 	playersUsedAnduril.add(player);
     }
     
+    @EventHandler
+    public void on(PlayerPickupItemEvent event) {
+	Player player = event.getPlayer();
+	if (event.getItem().getItemStack() == null) {
+	    return;
+	}
+	ItemStack pickedUp = event.getItem().getItemStack();
+	boolean itemIsAnduril = ShopUtils.itemHasName(name, pickedUp);
+	if (!itemIsAnduril) {
+	    return;
+	}
+	
+	if (player.getInventory().getHeldItemSlot() != player.getInventory().firstEmpty()) {
+	    return;
+	}
+	
+	giveEffects(player, 50000);
+	playersUsedAnduril.add(player);
+    }
+    
     private void playerSwitchedOffAnduril(Player player) {
 	if (playersUsedAnduril.contains(player)) {
 	    giveEffects(player, 40);
@@ -99,6 +121,12 @@ public class Anduril extends BaseShopItem implements Listener {
     @EventHandler
     public void on(PlayerDeathEvent event) {
 	Player player = event.getEntity();
+	playersUsedAnduril.remove(player);
+    }
+    
+    @EventHandler
+    public void on(PlayerQuitEvent event) {
+	Player player = event.getPlayer();
 	playersUsedAnduril.remove(player);
     }
     
@@ -115,6 +143,7 @@ public class Anduril extends BaseShopItem implements Listener {
 	}
 	
 	giveEffects(player, 40);
+	playersUsedAnduril.remove(player);
     }
     
     public static void giveEffects(Player player, int duration) {
