@@ -128,6 +128,7 @@ public class Anduril extends BaseShopItem implements Listener {
     public void on(PlayerQuitEvent event) {
 	Player player = event.getPlayer();
 	playersUsedAnduril.remove(player);
+	player.getActivePotionEffects().clear();
     }
     
     @EventHandler
