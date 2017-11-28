@@ -151,7 +151,7 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	horse.setMaxHealth(40);
 	horse.setHealth(40);
 	horse.setAdult();
-	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 56));
+	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 23));
 	horse.setCustomName(ChatColor.DARK_PURPLE + player.getName() + "'s " + name);
 	ShopUtils.freezeEntity((Horse) horse);
 	daredevils.put(player.getUniqueId(), horse);

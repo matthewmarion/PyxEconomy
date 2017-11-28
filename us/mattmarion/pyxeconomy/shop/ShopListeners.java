@@ -23,6 +23,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.profile.Profile;
+import us.mattmarion.pyxeconomy.shop.items.Anduril;
 
 public class ShopListeners implements Listener {
 
@@ -81,6 +82,7 @@ public class ShopListeners implements Listener {
     }
     
     private void completeTransaction(Player player, ItemStack item, Profile profile, double price, InventoryClickEvent event) {
+	checkIfAndurilInHand(player, item);
 	player.getInventory().addItem(item);
 	profile.removeBalance(price);
 	addPlayerPurchase(player.getUniqueId());
@@ -97,6 +99,19 @@ public class ShopListeners implements Listener {
 		player.closeInventory();
 	    }
 	}.runTask(PyxEconomy.getInstance());
+    }
+    
+    private void checkIfAndurilInHand(Player player, ItemStack item) {
+	String andurilName = ChatColor.DARK_AQUA + "Anduril";
+	if (!item.getItemMeta().getDisplayName().equals(andurilName)) {
+	    return;
+	}
+	int openSlot = player.getInventory().firstEmpty();
+	int heldItemSlot = player.getInventory().getHeldItemSlot();
+	System.out.println(openSlot + " : " + heldItemSlot);
+	if (openSlot == heldItemSlot) {
+	    Anduril.giveEffects(player, 50000);
+	}
     }
     
     @EventHandler

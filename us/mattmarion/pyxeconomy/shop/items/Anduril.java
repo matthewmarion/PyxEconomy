@@ -1,11 +1,16 @@
 package us.mattmarion.pyxeconomy.shop.items;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -65,32 +70,54 @@ public class Anduril extends BaseShopItem implements Listener {
 	return item;
     }
     
+    Set<Player> playersUsedAnduril = new HashSet<Player>();
     @EventHandler
     public void on(PlayerItemHeldEvent event) {
 	Player player = event.getPlayer();
 	int currentSlot = event.getNewSlot();
-	int oldSlot = event.getPreviousSlot();
 	if (player.getInventory().getItem(currentSlot) == null) {
+	    playerSwitchedOffAnduril(player);
 	    return;
 	}
 	ItemStack holdingItem = player.getInventory().getItem(currentSlot);
-	if (player.getInventory().getItem(oldSlot) == null) {
-	    return;
-	}
-	ItemStack oldItem = player.getInventory().getItem(oldSlot);
-	boolean oldItemIsAnduril = ShopUtils.itemHasName(name, oldItem);
-	if (oldItemIsAnduril) {
-	    giveEffects(player, 40);
-	    return;
-	}
 	boolean itemIsAnduril = ShopUtils.itemHasName(name, holdingItem);
 	if (!itemIsAnduril) {
+	    playerSwitchedOffAnduril(player);
 	    return;
 	}
 	giveEffects(player, 50000);
+	playersUsedAnduril.add(player);
     }
     
-    private void giveEffects(Player player, int duration) {
+    private void playerSwitchedOffAnduril(Player player) {
+	if (playersUsedAnduril.contains(player)) {
+	    giveEffects(player, 40);
+	    playersUsedAnduril.remove(player);
+	}
+    }
+    
+    @EventHandler
+    public void on(PlayerDeathEvent event) {
+	Player player = event.getEntity();
+	playersUsedAnduril.remove(player);
+    }
+    
+    @EventHandler
+    public void on(PlayerDropItemEvent event) {
+	Player player = event.getPlayer();
+	if (event.getItemDrop() == null) {
+	    return;
+	}
+	ItemStack dropped = event.getItemDrop().getItemStack();
+	boolean itemIsAnduril = ShopUtils.itemHasName(name, dropped);
+	if (!itemIsAnduril) {
+	    return;
+	}
+	
+	giveEffects(player, 40);
+    }
+    
+    public static void giveEffects(Player player, int duration) {
 	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, 0), true);
 	player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration, 0), true);
     }
