@@ -112,6 +112,6 @@ public class ShopUtils {
 		return false;
 	    }
 	}
-	return false;
+	return true;
     }
 }

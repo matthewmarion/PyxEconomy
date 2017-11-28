@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
@@ -128,7 +129,9 @@ public class Anduril extends BaseShopItem implements Listener {
     public void on(PlayerQuitEvent event) {
 	Player player = event.getPlayer();
 	playersUsedAnduril.remove(player);
-	player.getActivePotionEffects().clear();
+	for (PotionEffect effect : player.getActivePotionEffects()) {
+	    player.removePotionEffect(effect.getType());
+	}
     }
     
     @EventHandler

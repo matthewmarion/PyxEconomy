@@ -86,6 +86,7 @@ public class AxeOfPerun extends BaseShopItem implements Listener {
 	}
 	
 	boolean canPvp = ShopUtils.playerCanPvp(player);
+	System.out.println(canPvp);
 	if (!canPvp) {
 	    return;
 	}
