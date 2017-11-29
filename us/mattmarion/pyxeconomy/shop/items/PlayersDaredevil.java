@@ -159,7 +159,7 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	horse.getInventory().setItem(0, new ItemStack(Material.SADDLE));
 	horse.setVariant(Variant.SKELETON_HORSE);
 	horse.setTamed(true);
-	horse.setJumpStrength(3);
+	horse.setJumpStrength(.7);
 	horse.setMaxHealth(40);
 	horse.setHealth(40);
 	horse.setAdult();

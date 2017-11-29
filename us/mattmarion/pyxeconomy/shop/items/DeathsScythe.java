@@ -28,6 +28,7 @@ public class DeathsScythe extends BaseShopItem implements Listener {
     private static final double price = 50;
     private static final String priceLore = ChatColor.GOLD + "50" + ChatColor.GREEN + " coins";
     private static final String description = ChatColor.GREEN + "Removes 20% of the enemies current health.";
+    private static final String descriptionTwo = ChatColor.GREEN + "Limited to 30 hits.";
     private static ItemStack item; 
     
     public DeathsScythe(Inventory inv, int slot) {
@@ -60,6 +61,7 @@ public class DeathsScythe extends BaseShopItem implements Listener {
 	meta.setDisplayName(name);
 	lore.add(priceLore);
 	lore.add(description);
+	lore.add(descriptionTwo);
 	meta.setLore(lore);
 	item.setItemMeta(meta);
     }
@@ -104,10 +106,9 @@ public class DeathsScythe extends BaseShopItem implements Listener {
     
     private void incrementUsage(Player player) {
 	if (scytheUses.get(player.getUniqueId()) == null) {
-	    scytheUses.put(player.getUniqueId(), 25);
+	    scytheUses.put(player.getUniqueId(), 1);
 	} else {
 	    int uses = scytheUses.get(player.getUniqueId());
-	    System.out.println(uses);
 	    if (uses >= 30) {
 		breakScythe(player);
 	    }

@@ -13,7 +13,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import us.mattmarion.pyxeconomy.PyxEconomy;
 import us.mattmarion.pyxeconomy.shop.BaseShopItem;
 import us.mattmarion.pyxeconomy.shop.ShopUtils;
 
@@ -68,7 +70,6 @@ public class Dice extends BaseShopItem implements Listener {
     @EventHandler
     public void on(PlayerInteractEvent event) {
 	Player player = event.getPlayer();
-	int itemSlot = player.getInventory().getHeldItemSlot();
 	if (player.getItemInHand() == null) {
 	    return;
 	}
@@ -77,8 +78,22 @@ public class Dice extends BaseShopItem implements Listener {
 	if (!isDice) {
 	    return;
 	}
-	player.getInventory().removeItem(item);
+	useDice(item, player);
 	Bukkit.dispatchCommand(player, "pyx random " + player.getName());
 	
+    }
+    
+    private void useDice(ItemStack dice, Player player) {
+	int newAmount = dice.getAmount() - 1;
+	if (newAmount == 0) {
+	    new BukkitRunnable() {
+		@Override
+		public void run() {
+		    player.getInventory().remove(dice);
+		}
+	    }.runTask(PyxEconomy.getInstance());
+	    return;
+	}
+	dice.setAmount(newAmount);
     }
 }
