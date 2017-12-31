@@ -31,10 +31,8 @@ public class ShopUtils {
 	if (!item.hasItemMeta()) return false;
 	ItemMeta meta = item.getItemMeta();
 	if (meta.getDisplayName() == null) return false;
-	  
-	if (!item.getItemMeta().getDisplayName().equals(name)) return false;
-	    
-	return true;
+
+        return item.getItemMeta().getDisplayName().equals(name);
     }
     
     public static double getItemPriceFromName(String name) {
@@ -76,10 +74,7 @@ public class ShopUtils {
 	}
 	long startTime = cooldownPlayers.get(player.getUniqueId()) / 1000;
 	long currentTime = System.currentTimeMillis() / 1000;
-	if ((currentTime - startTime) >= cooldownTime) {
-	    return false;
-	}
-	return true;
+        return (currentTime - startTime) < cooldownTime;
     }
     
     public static void freezeEntity(Entity en) {

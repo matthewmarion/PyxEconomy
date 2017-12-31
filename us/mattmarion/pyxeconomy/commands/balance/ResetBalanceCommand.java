@@ -14,7 +14,7 @@ public class ResetBalanceCommand extends PyxCommandExecutor {
     public ResetBalanceCommand() {
 	setSubCommand("reset");
 	setPermission("pyxcoin.reset");
-	setUsage("/pyxcoin reset <name>");
+	setUsage("/pyx reset <name>");
 	setBoth();
 	setLength(2);
     }

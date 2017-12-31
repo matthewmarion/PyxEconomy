@@ -42,6 +42,7 @@ public class PyxEconomy extends JavaPlugin {
     public static FileConfiguration data, config, shopdata;
     
     public final void onEnable() {
+    	System.out.println("Loading up PyxEconomy...");
 	instance = this;
 	loadConfig();
 	registerEvents();
@@ -64,6 +65,7 @@ public class PyxEconomy extends JavaPlugin {
 	registerListener(new PlayersDaredevil());
 	registerListener(new FlaskOfIchor());
 	registerListener(new Dice());
+	registerListener(new FlaskOfIchor());
     }
     
     private void registerListener(Listener listener) {

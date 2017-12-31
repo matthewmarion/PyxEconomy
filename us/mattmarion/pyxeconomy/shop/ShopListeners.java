@@ -149,11 +149,8 @@ public class ShopListeners implements Listener {
 	int purchases = playerPurchases.get(player.getUniqueId());
 	for (int i = 4; i > 0; i--) {
 	    if (player.hasPermission("pyxshop." + i)) {
-		if (i <= purchases) {
-		    return false;
-		}
-		return true;
-	    }
+            return i > purchases;
+        }
 	}
 	return false;
     }

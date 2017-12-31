@@ -14,7 +14,7 @@ public class GiveBalanceCommand extends PyxCommandExecutor {
     public GiveBalanceCommand() {
 	setSubCommand("give");
 	setPermission("pyxcoin.give");
-	setUsage("/pyxcoin give <name> <amount>");
+	setUsage("/pyx give <name> <amount>");
 	setBoth();
 	setLength(3);
     }

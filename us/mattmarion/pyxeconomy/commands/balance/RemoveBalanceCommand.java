@@ -14,7 +14,7 @@ public class RemoveBalanceCommand extends PyxCommandExecutor {
     public RemoveBalanceCommand() {
 	setSubCommand("remove");
 	setPermission("pyxcoin.remove");
-	setUsage("/pyxcoin remove <player> <amount>");
+	setUsage("/pyx remove <player> <amount>");
 	setBoth();
 	setLength(3);
     }

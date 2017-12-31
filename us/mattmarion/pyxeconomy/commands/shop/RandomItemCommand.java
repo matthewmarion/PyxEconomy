@@ -21,7 +21,7 @@ public class RandomItemCommand extends PyxCommandExecutor {
     public RandomItemCommand() {
 	setSubCommand("random");
 	setPermission("pyxcoin.shop.random");
-	setUsage("/pyxcoin random <player>");
+	setUsage("/pyx random <player>");
 	setBoth();
 	setLength(2);
     }

@@ -18,7 +18,7 @@ public class AddItemCommand extends PyxCommandExecutor {
     public AddItemCommand() {
 	setSubCommand("add");
 	setPermission("pyxcoin.shop.add");
-	setUsage("/pyxcoin add <player> item <item>");
+	setUsage("/pyx add <player> item <item>");
 	setBoth();
 	setLength(4);
     }

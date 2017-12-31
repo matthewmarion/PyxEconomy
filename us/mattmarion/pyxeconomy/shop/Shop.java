@@ -39,10 +39,7 @@ public class Shop {
     }
     
     public static boolean locationExists(String name) {
-	if (PyxEconomy.shopdata.getConfigurationSection(name) == null) {
-	    return false;
-	}
-	return true;
+        return PyxEconomy.shopdata.getConfigurationSection(name) != null;
     }
     
     public void save() {
@@ -64,6 +61,6 @@ public class Shop {
 	npc.getLocation().setDirection(location.getDirection());
 	npc.setCustomName(ChatColor.GREEN + name + " Shop");
 	npc.setProfession(Profession.BLACKSMITH);
-	ShopUtils.freezeEntity((Villager) npc);
+	ShopUtils.freezeEntity(npc);
     }
 }

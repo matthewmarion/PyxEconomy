@@ -165,7 +165,7 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
 	horse.setAdult();
 	horse.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10000, 10));
 	horse.setCustomName(ChatColor.DARK_PURPLE + player.getName() + "'s " + name);
-	ShopUtils.freezeEntity((Horse) horse);
+	ShopUtils.freezeEntity(horse);
 	daredevils.put(player.getUniqueId(), horse);
     }
 
@@ -190,9 +190,6 @@ public class PlayersDaredevil extends BaseShopItem implements Listener {
     
     private boolean horseInWater(Entity horse) {
 	Material block = horse.getLocation().getBlock().getType();
-	if (block == Material.WATER || (block == Material.STATIONARY_WATER)) {
-	    return true;
-	}
-	return false;
+        return block == Material.WATER || (block == Material.STATIONARY_WATER);
     }
 }

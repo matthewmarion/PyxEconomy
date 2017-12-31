@@ -12,7 +12,7 @@ public class CreateShopCommand extends PyxCommandExecutor {
     public CreateShopCommand() {
 	setSubCommand("shop");
 	setPermission("pyxcoin.shop.create");
-	setUsage("/pyxcoin shop create <name>");
+	setUsage("/pyx shop create <name>");
 	setPlayer(true);
 	setLength(3);
     }

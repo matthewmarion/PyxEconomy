@@ -14,7 +14,7 @@ public class BalanceCommand extends PyxCommandExecutor {
     public BalanceCommand() {
 	setSubCommand("balance");
 	setPermission("pyxcoin.balance");
-	setUsage("/pyxcoin balance (name)");
+	setUsage("/pyx balance (name)");
 	setPlayer(true);
 	setLength(1);
     }
